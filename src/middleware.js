@@ -33,15 +33,21 @@ export async function middleware(request) {
         )
 
         // Refresh session if needed
-        const { data: { user } } = await supabase.auth.getUser()
+        const { data: { user }, error } = await supabase.auth.getUser()
+
+        console.log('Middleware: Path:', request.nextUrl.pathname)
+        console.log('Middleware: User found:', !!user)
+        if (error) console.error('Middleware Auth Error:', error)
 
         // Protect dashboard routes
         if (request.nextUrl.pathname.startsWith('/dashboard') && !user) {
+            console.log('Middleware: Redirecting to login')
             return NextResponse.redirect(new URL('/login', request.url))
         }
 
         // Redirect to dashboard if logged in and visiting auth pages
         if ((request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/register')) && user) {
+            console.log('Middleware: Redirecting to dashboard')
             return NextResponse.redirect(new URL('/dashboard', request.url))
         }
 
