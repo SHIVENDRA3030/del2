@@ -1,0 +1,117 @@
+.loading {
+    padding: 2rem;
+    text-align: center;
+    color: var(--gray-500);
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.tableContainer {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.table th {
+    background: var(--gray-50);
+    font-weight: 600;
+    color: var(--gray-700);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.userName {
+    font-weight: 500;
+}
+
+.empty {
+    text-align: center;
+    color: var(--gray-400);
+    padding: 3rem !important;
+}
+
+.role {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.admin {
+    background: #fce4ec;
+    color: #c2185b;
+}
+
+.user {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.actionBtn {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.promote {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.promote:hover {
+    background: #1976d2;
+    color: white;
+}
+
+.demote {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.demote:hover {
+    background: #c62828;
+    color: white;
+}
+
+.actionBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

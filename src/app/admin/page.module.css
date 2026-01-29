@@ -1,0 +1,123 @@
+.loading {
+    padding: 2rem;
+    text-align: center;
+    color: var(--gray-500);
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.statCard {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.statIcon {
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+.statValue {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--gray-900);
+}
+
+.statLabel {
+    font-size: 0.9rem;
+    color: var(--gray-500);
+}
+
+.section {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.tableContainer {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.table th {
+    font-weight: 600;
+    color: var(--gray-600);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.idCell {
+    font-family: monospace;
+    font-size: 0.85rem;
+}
+
+.empty {
+    text-align: center;
+    color: var(--gray-400);
+    padding: 2rem !important;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status_PENDING {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status_BOOKED {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.status_IN_TRANSIT {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.status_DELIVERED {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status_CANCELLED {
+    background: #f8d7da;
+    color: #721c24;
+}

@@ -1,0 +1,167 @@
+.loading {
+    padding: 2rem;
+    text-align: center;
+    color: var(--gray-500);
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.tableContainer {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.table th {
+    background: var(--gray-50);
+    font-weight: 600;
+    color: var(--gray-700);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.idCell {
+    font-family: monospace;
+    font-size: 0.85rem;
+}
+
+.empty {
+    text-align: center;
+    color: var(--gray-400);
+    padding: 3rem !important;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status_PENDING {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status_BOOKED {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.status_PICKED_UP {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.status_IN_TRANSIT {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.status_OUT_FOR_DELIVERY {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status_DELIVERED {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status_CANCELLED {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.actionBtn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.actionBtn:hover {
+    background: var(--primary-dark);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.modalContent h3 {
+    margin-bottom: 1rem;
+}
+
+.modalContent p {
+    margin-bottom: 1.5rem;
+    color: var(--gray-600);
+}
+
+.select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.modalActions {
+    display: flex;
+    gap: 1rem;
+}
