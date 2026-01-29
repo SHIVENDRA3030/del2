@@ -1,0 +1,182 @@
+.loading {
+    padding: 2rem;
+    text-align: center;
+    color: var(--gray-500);
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.statCard {
+    background: var(--white);
+    padding: 1.25rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.statIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-600);
+}
+
+.statIcon.pending {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.statIcon.transit {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.statIcon.delivered {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.statInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.statValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray-900);
+}
+
+.statLabel {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+}
+
+.section {
+    margin-bottom: 2rem;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.sectionHeader h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.viewAll {
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.tableContainer {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    min-width: 400px;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.table th {
+    background: var(--gray-50);
+    font-weight: 600;
+    color: var(--gray-700);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.idCell {
+    font-family: monospace;
+    font-size: 0.85rem;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.status_PENDING {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.status_BOOKED {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.status_PICKED_UP {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.status_IN_TRANSIT {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.status_OUT_FOR_DELIVERY {
+    background: #c7d2fe;
+    color: #4338ca;
+}
+
+.status_DELIVERED {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.status_CANCELLED {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .statsGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .statValue {
+        font-size: 2rem;
+    }
+}

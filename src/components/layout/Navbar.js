@@ -3,16 +3,18 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Menu, X, Package, LogOut, LayoutDashboard, Shield } from 'lucide-react'
+import { Menu, X, Package, LogOut, LayoutDashboard, Shield, Briefcase } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import styles from './Navbar.module.css'
 
 const ADMIN_ROLE_ID = '07c9fe4c-7b70-4c4a-9d1f-7de4878c9103'
+const EMPLOYEE_ROLE_ID = '5cfb9439-d269-44d3-b6c2-1d7d1d0898b0'
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
     const [user, setUser] = useState(null)
     const [isAdmin, setIsAdmin] = useState(false)
+    const [isEmployee, setIsEmployee] = useState(false)
     const [loading, setLoading] = useState(true)
     const router = useRouter()
     const supabase = createClient()
@@ -23,7 +25,6 @@ export default function Navbar() {
             setUser(user)
 
             if (user) {
-                // Check if admin
                 const { data: profile } = await supabase
                     .from('user_profiles')
                     .select('role_id')
@@ -31,16 +32,19 @@ export default function Navbar() {
                     .single()
 
                 setIsAdmin(profile?.role_id === ADMIN_ROLE_ID)
+                setIsEmployee(profile?.role_id === EMPLOYEE_ROLE_ID)
             }
             setLoading(false)
         }
 
         checkUser()
 
-        // Listen for auth changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
             setUser(session?.user || null)
-            if (!session?.user) setIsAdmin(false)
+            if (!session?.user) {
+                setIsAdmin(false)
+                setIsEmployee(false)
+            }
         })
 
         return () => subscription.unsubscribe()
@@ -50,6 +54,7 @@ export default function Navbar() {
         await supabase.auth.signOut()
         setUser(null)
         setIsAdmin(false)
+        setIsEmployee(false)
         router.push('/')
         router.refresh()
     }
@@ -87,6 +92,11 @@ export default function Navbar() {
                                     <Shield size={20} />
                                 </Link>
                             )}
+                            {isEmployee && (
+                                <Link href="/employee" className={styles.employeeLink} title="Employee Portal">
+                                    <Briefcase size={20} />
+                                </Link>
+                            )}
                             <Link href="/dashboard" className="btn btn-outline" style={{ padding: '0.5rem 1rem' }}>
                                 <LayoutDashboard size={16} style={{ marginRight: '0.5rem' }} />
                                 Dashboard
@@ -117,6 +127,7 @@ export default function Navbar() {
                     <>
                         <Link href="/dashboard" className={styles.mobileNavLink} onClick={toggleMenu}>Dashboard</Link>
                         {isAdmin && <Link href="/admin" className={styles.mobileNavLink} onClick={toggleMenu}>Admin</Link>}
+                        {isEmployee && <Link href="/employee" className={styles.mobileNavLink} onClick={toggleMenu}>Employee Portal</Link>}
                         <button onClick={() => { handleLogout(); toggleMenu(); }} className={styles.mobileLogout}>
                             Logout
                         </button>
