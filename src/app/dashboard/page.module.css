@@ -1,75 +1,81 @@
 .statsGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .statCard {
     background: var(--white);
-    padding: 1.5rem;
-    border-radius: 8px;
+    padding: 1.25rem;
+    border-radius: 10px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--gray-200);
 }
 
 .statLabel {
     color: var(--gray-500);
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.35rem;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.05em;
 }
 
 .statValue {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--gray-900);
 }
 
 .section {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 .sectionHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .sectionTitle {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--gray-900);
 }
 
 .tableContainer {
     background: var(--white);
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--gray-200);
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .table {
     width: 100%;
+    min-width: 500px;
     border-collapse: collapse;
 }
 
 .table th,
 .table td {
-    padding: 1rem;
+    padding: 0.75rem;
     text-align: left;
     border-bottom: 1px solid var(--gray-100);
+    white-space: nowrap;
 }
 
 .table th {
     background: var(--gray-50);
     font-weight: 600;
     color: var(--gray-700);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
 }
 
 .table tr:last-child td {
@@ -77,9 +83,9 @@
 }
 
 .statusBadge {
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 0.6rem;
     border-radius: 12px;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 600;
     display: inline-block;
 }
@@ -102,4 +108,50 @@
 .status_CANCELLED {
     background: #fee2e2;
     color: #991b1b;
+}
+
+/* Tablet */
+@media (min-width: 481px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .table th,
+    .table td {
+        padding: 1rem;
+    }
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+    .statsGrid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .statCard {
+        padding: 1.5rem;
+    }
+
+    .statValue {
+        font-size: 2rem;
+    }
+
+    .section {
+        margin-bottom: 3rem;
+    }
+
+    .sectionHeader {
+        margin-bottom: 1.5rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.25rem;
+    }
+
+    .statusBadge {
+        font-size: 0.85rem;
+        padding: 0.25rem 0.75rem;
+    }
 }

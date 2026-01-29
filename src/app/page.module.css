@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   background-color: var(--gray-50);
-  padding: 4rem 1rem;
+  padding: 2rem 1rem;
   overflow: hidden;
 }
 
@@ -10,37 +10,36 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2rem;
   align-items: center;
 }
 
 .heroText h1 {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   font-weight: 800;
   line-height: 1.2;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   color: var(--gray-900);
 }
 
 .heroText p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--gray-600);
-  margin-bottom: 2rem;
-  max-width: 500px;
+  margin-bottom: 1.5rem;
 }
 
 .trackingWidget {
   background: var(--white);
-  padding: 2rem;
-  border-radius: 8px;
+  padding: 1.5rem;
+  border-radius: 12px;
   box-shadow: var(--shadow-lg);
-  max-width: 500px;
+  width: 100%;
 }
 
 .trackingTitle {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -54,15 +53,17 @@
 
 .inputGroup {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .input {
-  flex: 1;
-  padding: 0.75rem;
+  width: 100%;
+  padding: 0.875rem;
   border: 1px solid var(--gray-300);
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: 6px;
+  font-size: 16px;
+  /* Prevents iOS zoom */
   outline: none;
   transition: border-color 0.2s;
 }
@@ -72,21 +73,21 @@
 }
 
 .features {
-  padding: 4rem 1rem;
+  padding: 3rem 1rem;
   background-color: var(--white);
 }
 
 .sectionTitle {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .servicesGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 1.25rem;
   max-width: var(--container-width);
   margin: 0 auto;
 }
@@ -94,75 +95,149 @@
 .serviceCard {
   background: var(--gray-50);
   border: 1px solid var(--gray-200);
-  padding: 2rem;
-  border-radius: 8px;
+  padding: 1.5rem;
+  border-radius: 12px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .serviceCard:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
   border-color: var(--primary);
 }
 
 .cardIcon {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   color: var(--primary);
 }
 
 .cardTitle {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .cardText {
   color: var(--gray-600);
   line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
 }
 
 .statsSection {
   background-color: var(--secondary);
   color: var(--white);
-  padding: 4rem 1rem;
+  padding: 3rem 1rem;
   text-align: center;
 }
 
 .statsGrid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
   max-width: var(--container-width);
   margin: 0 auto;
 }
 
 .statItem h3 {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   font-weight: 800;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   color: var(--primary-light);
 }
 
 .statItem p {
   color: var(--gray-300);
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
 
-@media (min-width: 768px) {
-  .heroContent {
-    grid-template-columns: 1.2fr 0.8fr;
+/* Tablet breakpoint */
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero {
+    padding: 2.5rem 1rem;
   }
 
   .heroText h1 {
-    font-size: 3.5rem;
+    font-size: 2rem;
+  }
+
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .inputGroup {
+    flex-direction: row;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 768px) {
+  .hero {
+    padding: 4rem 1rem;
+  }
+
+  .heroContent {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+  }
+
+  .heroText h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .heroText p {
+    font-size: 1.1rem;
+    max-width: 500px;
+  }
+
+  .trackingWidget {
+    padding: 2rem;
+    max-width: 500px;
+  }
+
+  .inputGroup {
+    flex-direction: row;
+  }
+
+  .features {
+    padding: 5rem 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+    margin-bottom: 3rem;
   }
 
   .servicesGrid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .serviceCard {
+    padding: 2rem;
+  }
+
+  .statsSection {
+    padding: 5rem 1rem;
   }
 
   .statsGrid {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .statItem h3 {
+    font-size: 2.5rem;
+  }
+
+  .statItem p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1024px) {
+  .heroText h1 {
+    font-size: 3.5rem;
   }
 }

@@ -2,11 +2,13 @@
 
 :root {
   /* Brand Colors */
-  --primary: #E11F26; /* Delhivery Red */
+  --primary: #E11F26;
+  /* Delhivery Red */
   --primary-dark: #B91C22;
   --primary-light: #FF4D54;
-  --secondary: #2C3E50; /* Deep Navy */
-  
+  --secondary: #2C3E50;
+  /* Deep Navy */
+
   /* Neutral Colors */
   --black: #000000;
   --white: #FFFFFF;
@@ -29,7 +31,7 @@
 
   /* Spacing */
   --container-width: 1280px;
-  --header-height: 80px;
+  --header-height: 70px;
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -50,8 +52,9 @@ body {
   font-family: 'Inter', sans-serif;
   color: var(--gray-900);
   background-color: var(--white);
-  line-height: 1.5;
+  line-height: 1.6;
   font-size: 16px;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -59,24 +62,27 @@ a {
   text-decoration: none;
 }
 
-/* Utilities */
+/* Container */
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
   padding: 0 1rem;
+  width: 100%;
 }
 
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.75rem 1.5rem;
-  border-radius: 4px;
+  border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   border: none;
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -86,6 +92,7 @@ a {
 
 .btn-primary:hover {
   background-color: var(--primary-dark);
+  transform: translateY(-1px);
 }
 
 .btn-outline {
@@ -99,17 +106,140 @@ a {
   color: var(--gray-900);
 }
 
-.text-primary { color: var(--primary); }
-.text-center { text-align: center; }
-.font-bold { font-weight: 700; }
-.flex { display: flex; }
-.items-center { align-items: center; }
-.justify-between { justify-content: space-between; }
-.grid { display: grid; }
-.hidden { display: none; }
+/* Utilities */
+.text-primary {
+  color: var(--primary);
+}
 
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.grid {
+  display: grid;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* Mobile First - Small phones (320px - 480px) */
+@media (max-width: 480px) {
+  :root {
+    --header-height: 60px;
+  }
+
+  html,
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  h1 {
+    font-size: 1.5rem !important;
+  }
+
+  h2 {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  :root {
+    --header-height: 65px;
+  }
+
+  html,
+  body {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Desktop utilities */
 @media (min-width: 768px) {
-  .md\:flex { display: flex; }
-  .md\:hidden { display: none; }
-  .md\:block { display: block; }
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
+  .md\:block {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:flex {
+    display: flex;
+  }
+
+  .lg\:hidden {
+    display: none;
+  }
+
+  .lg\:block {
+    display: block;
+  }
+}
+
+/* Form elements responsive */
+input,
+textarea,
+select {
+  font-size: 16px;
+  /* Prevents iOS zoom */
+}
+
+/* Safe area for notched phones */
+@supports (padding: max(0px)) {
+  .container {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Touch-friendly tap targets */
+@media (hover: none) and (pointer: coarse) {
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  a,
+  button {
+    min-height: 44px;
+  }
 }
