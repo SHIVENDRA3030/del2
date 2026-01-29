@@ -2,26 +2,38 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { Search } from 'lucide-react'
 import styles from './page.module.css'
-
-const ROLES = {
-    admin: '07c9fe4c-7b70-4c4a-9d1f-7de4878c9103',
-    user: 'a15de6fc-8654-4b57-9124-58553473fdf4',
-    employee: null // Will be set dynamically
-}
 
 export default function AdminUsersPage() {
     const [users, setUsers] = useState([])
+    const [filteredUsers, setFilteredUsers] = useState([])
     const [roles, setRoles] = useState([])
     const [loading, setLoading] = useState(true)
     const [updating, setUpdating] = useState(null)
     const [message, setMessage] = useState(null)
+    const [searchQuery, setSearchQuery] = useState('')
     const supabase = createClient()
 
     useEffect(() => {
         fetchRoles()
         fetchUsers()
     }, [])
+
+    useEffect(() => {
+        // Filter users based on search query
+        if (searchQuery.trim() === '') {
+            setFilteredUsers(users)
+        } else {
+            const query = searchQuery.toLowerCase()
+            setFilteredUsers(
+                users.filter(user =>
+                    user.email?.toLowerCase().includes(query) ||
+                    user.full_name?.toLowerCase().includes(query)
+                )
+            )
+        }
+    }, [searchQuery, users])
 
     async function fetchRoles() {
         const { data } = await supabase
@@ -41,6 +53,7 @@ export default function AdminUsersPage() {
 
             if (error) throw error
             setUsers(data || [])
+            setFilteredUsers(data || [])
         } catch (err) {
             console.error('Error:', err)
         } finally {
@@ -82,26 +95,46 @@ export default function AdminUsersPage() {
                 </div>
             )}
 
+            <div className={styles.searchContainer}>
+                <Search size={18} className={styles.searchIcon} />
+                <input
+                    type="text"
+                    placeholder="Search by email or name..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className={styles.searchInput}
+                />
+                {searchQuery && (
+                    <span className={styles.resultCount}>
+                        {filteredUsers.length} result{filteredUsers.length !== 1 ? 's' : ''}
+                    </span>
+                )}
+            </div>
+
             <div className={styles.tableContainer}>
                 <table className={styles.table}>
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Current Role</th>
+                            <th>Email</th>
+                            <th>Role</th>
                             <th>Change Role</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {users.length === 0 ? (
+                        {filteredUsers.length === 0 ? (
                             <tr>
-                                <td colSpan="3" className={styles.empty}>No users found</td>
+                                <td colSpan="4" className={styles.empty}>
+                                    {searchQuery ? 'No users match your search' : 'No users found'}
+                                </td>
                             </tr>
                         ) : (
-                            users.map((user) => (
+                            filteredUsers.map((user) => (
                                 <tr key={user.id}>
                                     <td>
                                         <div className={styles.userName}>{user.full_name || 'N/A'}</div>
                                     </td>
+                                    <td className={styles.emailCell}>{user.email || 'N/A'}</td>
                                     <td>
                                         <span className={`${styles.role} ${styles['role_' + user.roles?.name]}`}>
                                             {user.roles?.name || 'user'}
