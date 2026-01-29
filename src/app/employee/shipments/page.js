@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 import { Search } from 'lucide-react'
 import styles from './page.module.css'
 
-const STATUS_OPTIONS = ['PENDING', 'BOOKED', 'PICKED_UP', 'IN_TRANSIT', 'OUT_FOR_DELIVERY', 'DELIVERED', 'CANCELLED']
+const STATUS_OPTIONS = ['PENDING', 'BOOKED', 'PICKED_UP', 'IN_TRANSIT', 'OUT_FOR_DELIVERY', 'DELIVERED', 'CANCELLED', 'RETURNED']
 
 export default function EmployeeShipmentsPage() {
     const [shipments, setShipments] = useState([])
@@ -69,7 +69,7 @@ export default function EmployeeShipmentsPage() {
 
             if (updateError) throw updateError
 
-            await supabase
+            const { error: eventError } = await supabase
                 .from('shipment_events')
                 .insert({
                     shipment_id: selectedShipment.id,
@@ -78,12 +78,15 @@ export default function EmployeeShipmentsPage() {
                     location: 'Employee Update'
                 })
 
+            if (eventError) throw eventError
+
             setMessage({ type: 'success', text: 'Status updated successfully!' })
             setSelectedShipment(null)
             setNewStatus('')
             fetchShipments()
         } catch (err) {
             setMessage({ type: 'error', text: err.message })
+            console.error(err)
         } finally {
             setUpdating(false)
         }
