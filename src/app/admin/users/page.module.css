@@ -5,9 +5,9 @@
 }
 
 .title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .message {
@@ -29,18 +29,20 @@
 .tableContainer {
     background: var(--white);
     border-radius: 12px;
-    overflow: hidden;
+    overflow-x: auto;
     box-shadow: var(--shadow-sm);
+    margin-bottom: 2rem;
 }
 
 .table {
     width: 100%;
+    min-width: 400px;
     border-collapse: collapse;
 }
 
 .table th,
 .table td {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     text-align: left;
     border-bottom: 1px solid var(--gray-100);
 }
@@ -49,7 +51,7 @@
     background: var(--gray-50);
     font-weight: 600;
     color: var(--gray-700);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
 }
 
@@ -72,46 +74,91 @@
     text-transform: capitalize;
 }
 
-.admin {
+.role_admin {
     background: #fce4ec;
     color: #c2185b;
 }
 
-.user {
+.role_employee {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.role_user {
     background: #e8f5e9;
     color: #388e3c;
 }
 
-.actionBtn {
-    border: none;
-    padding: 0.5rem 1rem;
+.roleSelect {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--gray-300);
     border-radius: 6px;
+    font-size: 0.9rem;
+    background: var(--white);
     cursor: pointer;
-    font-size: 0.85rem;
-    transition: all 0.2s;
+    min-width: 120px;
 }
 
-.promote {
-    background: #e3f2fd;
-    color: #1976d2;
+.roleSelect:focus {
+    outline: none;
+    border-color: var(--primary);
 }
 
-.promote:hover {
-    background: #1976d2;
-    color: white;
-}
-
-.demote {
-    background: #ffebee;
-    color: #c62828;
-}
-
-.demote:hover {
-    background: #c62828;
-    color: white;
-}
-
-.actionBtn:disabled {
-    opacity: 0.5;
+.roleSelect:disabled {
+    opacity: 0.6;
     cursor: not-allowed;
+}
+
+.updating {
+    margin-left: 0.5rem;
+    color: var(--gray-400);
+}
+
+.rolesInfo {
+    background: var(--white);
+    padding: 1.25rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.rolesInfo h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--gray-800);
+}
+
+.rolesInfo ul {
+    list-style: none;
+    padding: 0;
+}
+
+.rolesInfo li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: 0.9rem;
+    color: var(--gray-600);
+}
+
+.rolesInfo li:last-child {
+    border-bottom: none;
+}
+
+.rolesInfo strong {
+    color: var(--gray-800);
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .table th,
+    .table td {
+        padding: 1rem;
+    }
+
+    .rolesInfo {
+        padding: 1.5rem;
+    }
 }

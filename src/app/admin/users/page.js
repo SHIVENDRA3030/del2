@@ -4,19 +4,32 @@ import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import styles from './page.module.css'
 
-const ADMIN_ROLE_ID = '07c9fe4c-7b70-4c4a-9d1f-7de4878c9103'
-const USER_ROLE_ID = 'a15de6fc-8654-4b57-9124-58553473fdf4'
+const ROLES = {
+    admin: '07c9fe4c-7b70-4c4a-9d1f-7de4878c9103',
+    user: 'a15de6fc-8654-4b57-9124-58553473fdf4',
+    employee: null // Will be set dynamically
+}
 
 export default function AdminUsersPage() {
     const [users, setUsers] = useState([])
+    const [roles, setRoles] = useState([])
     const [loading, setLoading] = useState(true)
     const [updating, setUpdating] = useState(null)
     const [message, setMessage] = useState(null)
     const supabase = createClient()
 
     useEffect(() => {
+        fetchRoles()
         fetchUsers()
     }, [])
+
+    async function fetchRoles() {
+        const { data } = await supabase
+            .from('roles')
+            .select('*')
+            .order('name')
+        setRoles(data || [])
+    }
 
     async function fetchUsers() {
         setLoading(true)
@@ -35,25 +48,20 @@ export default function AdminUsersPage() {
         }
     }
 
-    const toggleAdminRole = async (user) => {
-        const isCurrentlyAdmin = user.role_id === ADMIN_ROLE_ID
-        const newRoleId = isCurrentlyAdmin ? USER_ROLE_ID : ADMIN_ROLE_ID
-
-        setUpdating(user.id)
+    const updateRole = async (userId, newRoleId) => {
+        setUpdating(userId)
         setMessage(null)
 
         try {
             const { error } = await supabase
                 .from('user_profiles')
                 .update({ role_id: newRoleId })
-                .eq('id', user.id)
+                .eq('id', userId)
 
             if (error) throw error
 
-            setMessage({
-                type: 'success',
-                text: `User ${isCurrentlyAdmin ? 'demoted to User' : 'promoted to Admin'}`
-            })
+            const roleName = roles.find(r => r.id === newRoleId)?.name || 'unknown'
+            setMessage({ type: 'success', text: `Role updated to ${roleName}` })
             fetchUsers()
         } catch (err) {
             setMessage({ type: 'error', text: err.message })
@@ -79,15 +87,14 @@ export default function AdminUsersPage() {
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Role</th>
-                            <th>Joined</th>
-                            <th>Actions</th>
+                            <th>Current Role</th>
+                            <th>Change Role</th>
                         </tr>
                     </thead>
                     <tbody>
                         {users.length === 0 ? (
                             <tr>
-                                <td colSpan="4" className={styles.empty}>No users found</td>
+                                <td colSpan="3" className={styles.empty}>No users found</td>
                             </tr>
                         ) : (
                             users.map((user) => (
@@ -96,30 +103,39 @@ export default function AdminUsersPage() {
                                         <div className={styles.userName}>{user.full_name || 'N/A'}</div>
                                     </td>
                                     <td>
-                                        <span className={`${styles.role} ${user.role_id === ADMIN_ROLE_ID ? styles.admin : styles.user}`}>
+                                        <span className={`${styles.role} ${styles['role_' + user.roles?.name]}`}>
                                             {user.roles?.name || 'user'}
                                         </span>
                                     </td>
-                                    <td>{new Date(user.created_at).toLocaleDateString()}</td>
                                     <td>
-                                        <button
-                                            className={`${styles.actionBtn} ${user.role_id === ADMIN_ROLE_ID ? styles.demote : styles.promote}`}
-                                            onClick={() => toggleAdminRole(user)}
+                                        <select
+                                            value={user.role_id || ''}
+                                            onChange={(e) => updateRole(user.id, e.target.value)}
                                             disabled={updating === user.id}
+                                            className={styles.roleSelect}
                                         >
-                                            {updating === user.id
-                                                ? 'Updating...'
-                                                : user.role_id === ADMIN_ROLE_ID
-                                                    ? 'Remove Admin'
-                                                    : 'Make Admin'
-                                            }
-                                        </button>
+                                            {roles.map(role => (
+                                                <option key={role.id} value={role.id}>
+                                                    {role.name.charAt(0).toUpperCase() + role.name.slice(1)}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {updating === user.id && <span className={styles.updating}>...</span>}
                                     </td>
                                 </tr>
                             ))
                         )}
                     </tbody>
                 </table>
+            </div>
+
+            <div className={styles.rolesInfo}>
+                <h3>Role Permissions</h3>
+                <ul>
+                    <li><strong>Admin:</strong> Full access to admin dashboard, can manage users & shipments</li>
+                    <li><strong>Employee:</strong> Access to shipment management, can update shipment status</li>
+                    <li><strong>User:</strong> Standard user, can book and track their own shipments</li>
+                </ul>
             </div>
         </div>
     )
