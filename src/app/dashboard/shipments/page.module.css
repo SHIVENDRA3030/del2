@@ -1,0 +1,98 @@
+.loading {
+    padding: 2rem;
+    text-align: center;
+    color: var(--gray-500);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--gray-50);
+    border-radius: 8px;
+}
+
+.empty p {
+    color: var(--gray-500);
+    margin-bottom: 1.5rem;
+}
+
+.tableContainer {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.table th,
+.table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.table th {
+    background: var(--gray-50);
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+.idCell {
+    font-family: monospace;
+    font-size: 0.85rem;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status_PENDING {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status_IN_TRANSIT {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.status_DELIVERED {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status_CANCELLED {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.trackLink {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.trackLink:hover {
+    text-decoration: underline;
+}
