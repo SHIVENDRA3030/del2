@@ -252,11 +252,11 @@
 @media (min-width: 481px) {
     .logo {
         font-size: 1.25rem;
-        gap: 0.5rem;
+        gap: var(--space-sm);
     }
 
     .navActions {
-        gap: 0.75rem;
+        gap: var(--space-lg);
     }
 
     .dashboardText {
@@ -267,7 +267,7 @@
 /* Desktop */
 @media (min-width: 768px) {
     .logo {
-        font-size: 1.5rem;
+        font-size: 1.375rem;
     }
 
     .desktopNav {
@@ -275,7 +275,7 @@
     }
 
     .navLinks {
-        gap: 2rem;
+        gap: 2.5rem;
     }
 
     .navLink {
@@ -287,6 +287,6 @@
     }
 
     .navActions {
-        gap: 1rem;
+        gap: var(--space-lg);
     }
 }
