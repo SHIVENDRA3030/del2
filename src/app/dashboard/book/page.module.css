@@ -209,37 +209,7 @@ textarea.input {
 }
 
 /* ============================================
-   TABLET BREAKPOINT (481px+)
-   ============================================ */
-@media (min-width: 481px) {
-    .container {
-        padding: 1.5rem;
-    }
-
-    .title {
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    /* Switch to CSS Grid for 2-column layout */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-
-    /* Full width items span both columns */
-    .inputGroupFull {
-        grid-column: 1 / -1;
-    }
-
-    .rateAmount {
-        font-size: 2rem;
-    }
-}
-
-/* ============================================
-   DESKTOP BREAKPOINT (768px+)
+   TABLET/DESKTOP BREAKPOINT (768px+)
    ============================================ */
 @media (min-width: 768px) {
     .container {
@@ -262,13 +232,25 @@ textarea.input {
         padding: 0.5rem 1rem;
     }
 
+    /* Switch to 2-column grid ONLY on tablets and desktop */
     .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 1.25rem;
+    }
+
+    /* Full width items span both columns */
+    .inputGroupFull {
+        grid-column: 1 / -1;
     }
 
     .estimatedRate {
         text-align: right;
         padding: 1.5rem;
+    }
+
+    .rateAmount {
+        font-size: 2rem;
     }
 
     .actions {
@@ -278,12 +260,16 @@ textarea.input {
     }
 
     .cancelBtn {
+        font-size: 0.95rem;
+        /* Explicitly reset to desktop size */
         width: auto;
         order: 1;
         min-width: 120px;
     }
 
     .submitBtn {
+        font-size: 0.95rem;
+        /* Explicitly reset to desktop size */
         width: auto;
         order: 2;
         min-width: 160px;
