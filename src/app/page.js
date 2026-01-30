@@ -13,7 +13,7 @@ export default function Home() {
   const stats = [
     { value: '2B+', label: 'Orders Fulfilled' },
     { value: '18K+', label: 'Pin Codes Served' },
-    { value: '20+', label: 'Automated Sort Centers' },
+    { value: '100+', label: 'Automated Sort Centers' },
     { value: '24/7', label: 'Support Available' },
   ]
 
