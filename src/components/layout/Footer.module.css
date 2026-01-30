@@ -48,10 +48,11 @@
 .colTitle {
     color: var(--white);
     font-size: clamp(1rem, 3vw, 1.125rem);
-    font-weight: 700;
-    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 600;
+    margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
     position: relative;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.75rem;
+    letter-spacing: -0.3px;
 }
 
 .colTitle::after {
@@ -59,9 +60,9 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 40px;
+    width: 32px;
     height: 2px;
-    background: var(--primary);
+    background: var(--primary-light);
     border-radius: 1px;
 }
 
@@ -69,7 +70,7 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: clamp(0.5rem, 2vw, 0.75rem);
+    gap: var(--space-md);
 }
 
 .link {
@@ -77,11 +78,11 @@
     transition: all 0.2s ease;
     color: var(--gray-400);
     display: inline-block;
-    padding: 0.25rem 0;
+    padding: var(--space-xs) 0;
 }
 
 .link:hover {
-    color: var(--white);
+    color: var(--primary-light);
     transform: translateX(4px);
 }
 
