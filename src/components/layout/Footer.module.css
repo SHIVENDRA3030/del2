@@ -41,7 +41,7 @@
 
 .description {
     font-size: clamp(0.875rem, 2vw, 0.95rem);
-    line-height: 1.7;
+    line-height: 1.6;
     max-width: 100%;
     color: var(--gray-400);
 }
