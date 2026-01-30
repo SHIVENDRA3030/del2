@@ -75,8 +75,8 @@ export default function AdminDashboard() {
 
             <div className={styles.statsGrid}>
                 <div className={styles.statCard}>
-                    <div className={styles.statIcon} style={{ background: '#e3f2fd' }}>
-                        <Package size={24} color="#1976d2" />
+                    <div className={styles.statIcon} style={{ background: '#ccfbf1' }}>
+                        <Package size={24} color="#0f766e" />
                     </div>
                     <div>
                         <div className={styles.statValue}>{stats.totalShipments}</div>
@@ -84,8 +84,8 @@ export default function AdminDashboard() {
                     </div>
                 </div>
                 <div className={styles.statCard}>
-                    <div className={styles.statIcon} style={{ background: '#e8f5e9' }}>
-                        <Users size={24} color="#388e3c" />
+                    <div className={styles.statIcon} style={{ background: '#d1fae5' }}>
+                        <Users size={24} color="#047857" />
                     </div>
                     <div>
                         <div className={styles.statValue}>{stats.totalUsers}</div>
@@ -93,8 +93,8 @@ export default function AdminDashboard() {
                     </div>
                 </div>
                 <div className={styles.statCard}>
-                    <div className={styles.statIcon} style={{ background: '#fff3e0' }}>
-                        <Clock size={24} color="#f57c00" />
+                    <div className={styles.statIcon} style={{ background: '#fef9c3' }}>
+                        <Clock size={24} color="#854d0e" />
                     </div>
                     <div>
                         <div className={styles.statValue}>{stats.pendingShipments}</div>
@@ -102,8 +102,8 @@ export default function AdminDashboard() {
                     </div>
                 </div>
                 <div className={styles.statCard}>
-                    <div className={styles.statIcon} style={{ background: '#fce4ec' }}>
-                        <TrendingUp size={24} color="#c2185b" />
+                    <div className={styles.statIcon} style={{ background: '#cffafe' }}>
+                        <TrendingUp size={24} color="#0e7490" />
                     </div>
                     <div>
                         <div className={styles.statValue}>{stats.todayShipments}</div>

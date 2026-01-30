@@ -98,26 +98,26 @@
 }
 
 .status_PENDING {
-    background: #fff3cd;
-    color: #856404;
+    background: #fef9c3;
+    color: #854d0e;
 }
 
 .status_BOOKED {
-    background: #e2e8f0;
-    color: #475569;
+    background: #ccfbf1;
+    color: #0f766e;
 }
 
 .status_IN_TRANSIT {
-    background: #cce5ff;
-    color: #004085;
+    background: #cffafe;
+    color: #0e7490;
 }
 
 .status_DELIVERED {
-    background: #d4edda;
-    color: #155724;
+    background: #d1fae5;
+    color: #047857;
 }
 
 .status_CANCELLED {
-    background: #f8d7da;
-    color: #721c24;
+    background: #fee2e2;
+    color: #991b1b;
 }

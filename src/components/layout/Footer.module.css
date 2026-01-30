@@ -1,7 +1,7 @@
 .footer {
-    background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
-    color: var(--gray-300);
-    padding: clamp(3rem, 8vw, 5rem) 0 clamp(2rem, 5vw, 3rem);
+    background: var(--gray-900);
+    color: var(--gray-400);
+    padding: clamp(4rem, 8vw, 5rem) 0 clamp(2rem, 5vw, 3rem);
     position: relative;
     overflow: hidden;
 }
@@ -19,28 +19,29 @@
 .grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(2rem, 5vw, 3rem);
+    gap: clamp(var(--space-2xl), 5vw, var(--space-3xl));
     position: relative;
     z-index: 1;
 }
 
 .brandCol {
-    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: clamp(var(--space-xl), 4vw, var(--space-2xl));
 }
 
 .brandName {
     color: var(--white);
     font-size: clamp(1.25rem, 4vw, 1.5rem);
-    font-weight: 800;
+    font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: clamp(0.75rem, 2vw, 1rem);
+    gap: var(--space-sm);
+    margin-bottom: clamp(1rem, 2vw, 1.25rem);
+    letter-spacing: -0.5px;
 }
 
 .description {
     font-size: clamp(0.875rem, 2vw, 0.95rem);
-    line-height: 1.7;
+    line-height: 1.6;
     max-width: 100%;
     color: var(--gray-400);
 }
@@ -48,10 +49,11 @@
 .colTitle {
     color: var(--white);
     font-size: clamp(1rem, 3vw, 1.125rem);
-    font-weight: 700;
-    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 600;
+    margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
     position: relative;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.75rem;
+    letter-spacing: -0.3px;
 }
 
 .colTitle::after {
@@ -59,9 +61,9 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 40px;
+    width: 32px;
     height: 2px;
-    background: var(--primary);
+    background: var(--primary-light);
     border-radius: 1px;
 }
 
@@ -69,7 +71,7 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: clamp(0.5rem, 2vw, 0.75rem);
+    gap: var(--space-md);
 }
 
 .link {
@@ -77,11 +79,11 @@
     transition: all 0.2s ease;
     color: var(--gray-400);
     display: inline-block;
-    padding: 0.25rem 0;
+    padding: var(--space-xs) 0;
 }
 
 .link:hover {
-    color: var(--white);
+    color: var(--primary-light);
     transform: translateX(4px);
 }
 
