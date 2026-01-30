@@ -115,17 +115,17 @@
     align-items: center;
     padding: 1rem 0;
     border-bottom: 1px solid var(--gray-100);
-    color: var(--gray-700);
+    color: var(--gray-600);
     font-weight: 500;
-    font-size: 1.1rem;
-    min-height: 56px;
+    font-size: 1rem;
+    min-height: 48px;
     transition: all 0.2s ease;
     position: relative;
 }
 
 .mobileNavLink:hover {
     color: var(--primary);
-    padding-left: 0.5rem;
+    padding-left: var(--space-sm);
 }
 
 .mobileNavLink::before {
