@@ -37,20 +37,36 @@
 
 .navLinks {
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
     list-style: none;
 }
 
 .navLink {
-    color: var(--gray-700);
+    color: var(--gray-600);
     font-weight: 500;
-    font-size: 0.9rem;
-    transition: color 0.2s;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
     padding: 0.5rem 0;
+    position: relative;
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.2s ease;
 }
 
 .navLink:hover {
     color: var(--primary);
+}
+
+.navLink:hover::after {
+    width: 100%;
 }
 
 .navActions {
