@@ -171,30 +171,42 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--gray-500);
+    color: var(--gray-600);
     padding: 0.5rem;
-    border-radius: 6px;
-    transition: all 0.2s;
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 40px;
-    min-height: 40px;
+    min-width: 44px;
+    min-height: 44px;
 }
 
 .logoutBtn:hover {
-    background: #fee2e2;
-    color: #dc2626;
+    background: rgba(220, 38, 38, 0.08);
+    color: var(--error);
 }
 
-.adminLink {
-    min-width: 40px;
-    min-height: 40px;
+.adminLink,
+.employeeLink {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-600);
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
 }
 
 .adminLink:hover {
-    background: #fce7f3;
-    color: #be185d;
+    background: rgba(27, 122, 122, 0.08);
+    color: var(--primary);
+}
+
+.employeeLink:hover {
+    background: rgba(16, 185, 129, 0.08);
+    color: var(--secondary);
 }
 
 .loadingDot {
