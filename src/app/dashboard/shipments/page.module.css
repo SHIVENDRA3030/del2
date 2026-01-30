@@ -29,16 +29,19 @@
 }
 
 .tableContainer {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
     overflow-x: auto;
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
-    background: var(--white);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
+    min-width: 600px;
+    /* Prevent squashing on mobile */
 }
 
 .table th,
@@ -72,9 +75,24 @@
     color: #856404;
 }
 
+.status_BOOKED {
+    background: #e3f2fd;
+    color: #0d47a1;
+}
+
+.status_PICKED_UP {
+    background: #e0f2f1;
+    color: #00695c;
+}
+
 .status_IN_TRANSIT {
     background: #cce5ff;
     color: #004085;
+}
+
+.status_OUT_FOR_DELIVERY {
+    background: #fff3cd;
+    color: #856404;
 }
 
 .status_DELIVERED {
@@ -85,6 +103,12 @@
 .status_CANCELLED {
     background: #f8d7da;
     color: #721c24;
+}
+
+.status_RETURNED {
+    background: #f8f9fa;
+    color: #1b1e21;
+    border: 1px solid #d6d8db;
 }
 
 .trackLink {
