@@ -3,13 +3,20 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { AnimatePresence } from 'framer-motion'
 import styles from './page.module.css'
+
+// Import Steps
+import PickupStep from './steps/PickupStep'
+import DeliveryStep from './steps/DeliveryStep'
+import PackageStep from './steps/PackageStep'
 
 export default function BookShipment() {
     const router = useRouter()
     const supabase = createClient()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
+    const [currentStep, setCurrentStep] = useState(0)
 
     // Service types
     const [serviceTypes, setServiceTypes] = useState([])
@@ -34,13 +41,11 @@ export default function BookShipment() {
     useEffect(() => {
         // Fetch service types
         async function fetchServices() {
-            // Mock data if table empty or fetch real
             const { data, error } = await supabase.from('service_types').select('*').eq('is_active', true)
             if (data && data.length > 0) {
                 setServiceTypes(data)
                 setSelectedService(data[0].id)
             } else {
-                // Fallback default
                 setServiceTypes([{ id: 'default', name: 'Standard Express', base_rate: 50, per_kg_rate: 20 }]);
                 setSelectedService('default')
             }
@@ -62,8 +67,11 @@ export default function BookShipment() {
         setFormData(prev => ({ ...prev, [name]: value }))
     }
 
+    const nextStep = () => setCurrentStep(prev => Math.min(prev + 1, 2))
+    const prevStep = () => setCurrentStep(prev => Math.max(prev - 1, 0))
+
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e?.preventDefault()
         setLoading(true)
         setError(null)
 
@@ -77,7 +85,6 @@ export default function BookShipment() {
                 .insert({
                     user_id: user.id,
                     status: 'PENDING',
-                    // service_type_id: selectedService // Assuming column exists or we add metadata
                 })
                 .select()
                 .single()
@@ -142,100 +149,57 @@ export default function BookShipment() {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Book a Shipment</h1>
-
-            {error && <div className="text-error mb-4 text-center">{error}</div>}
-
-            <form onSubmit={handleSubmit}>
-                {/* Pickup Details */}
-                <div className={styles.section}>
-                    <h2 className={styles.sectionTitle}>Pickup Details</h2>
-                    <div className={styles.grid}>
-                        <div className={styles.inputGroup}>
-                            <label className={styles.label}>Sender Name</label>
-                            <input name="pickup_name" value={formData.pickup_name} onChange={handleChange} className={styles.input} required />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={styles.label}>Phone Number</label>
-                            <input name="pickup_phone" value={formData.pickup_phone} onChange={handleChange} className={styles.input} required />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={styles.label}>Pincode</label>
-                            <input name="pickup_pincode" value={formData.pickup_pincode} onChange={handleChange} className={styles.input} required />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={styles.label}>City</label>
-                            <input name="pickup_city" value={formData.pickup_city} onChange={handleChange} className={styles.input} required />
-                        </div>
-                        <div className={`${styles.inputGroup} ${styles.inputGroupFull}`}>
-                            <label className={styles.label}>Address</label>
-                            <textarea name="pickup_address" value={formData.pickup_address} onChange={handleChange} className={styles.input} required rows="2" />
-                        </div>
-                    </div>
+            <div className={styles.progressContainer}>
+                <div className={styles.progressBar}>
+                    <div
+                        className={styles.progressFill}
+                        style={{ width: `${((currentStep + 1) / 3) * 100}%` }}
+                    ></div>
                 </div>
-
-                {/* Drop Details */}
-                <div className={styles.section}>
-                    <h2 className={styles.sectionTitle}>Delivery Details</h2>
-                    <div className={styles.grid}>
-                        <div className={styles.inputGroup}>
-                            <label className={styles.label}>Receiver Name</label>
-                            <input name="drop_name" value={formData.drop_name} onChange={handleChange} className={styles.input} required />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={styles.label}>Phone Number</label>
-                            <input name="drop_phone" value={formData.drop_phone} onChange={handleChange} className={styles.input} required />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={styles.label}>Pincode</label>
-                            <input name="drop_pincode" value={formData.drop_pincode} onChange={handleChange} className={styles.input} required />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={styles.label}>City</label>
-                            <input name="drop_city" value={formData.drop_city} onChange={handleChange} className={styles.input} required />
-                        </div>
-                        <div className={`${styles.inputGroup} ${styles.inputGroupFull}`}>
-                            <label className={styles.label}>Address</label>
-                            <textarea name="drop_address" value={formData.drop_address} onChange={handleChange} className={styles.input} required rows="2" />
-                        </div>
-                    </div>
+                <div className={styles.stepIndicators}>
+                    <span className={`${styles.stepIndicator} ${currentStep >= 0 ? styles.activeStepIndicator : ''}`}>Pickup</span>
+                    <span className={`${styles.stepIndicator} ${currentStep >= 1 ? styles.activeStepIndicator : ''}`}>Delivery</span>
+                    <span className={`${styles.stepIndicator} ${currentStep >= 2 ? styles.activeStepIndicator : ''}`}>Details</span>
                 </div>
+            </div>
 
-                {/* Package Details */}
-                <div className={styles.section}>
-                    <h2 className={styles.sectionTitle}>Package & Service</h2>
-                    <div className={styles.grid}>
-                        <div className={styles.inputGroup}>
-                            <label className={styles.label}>Weight (kg)</label>
-                            <input type="number" name="weight" step="0.1" value={formData.weight} onChange={handleChange} className={styles.input} required />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={styles.label}>Content Description</label>
-                            <input name="description" value={formData.description} onChange={handleChange} className={styles.input} required />
-                        </div>
-                        <div className={`${styles.inputGroup} ${styles.inputGroupFull}`}>
-                            <label className={styles.label}>Service Type</label>
-                            <select value={selectedService} onChange={(e) => setSelectedService(e.target.value)} className={styles.select}>
-                                {serviceTypes.map(type => (
-                                    <option key={type.id} value={type.id}>{type.name}</option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
+            <h1 className={styles.mainTitle}>Book a Shipment</h1>
 
-                    <div className={styles.estimatedRate}>
-                        <div className={styles.rateLabel}>Estimated Shipping Cost</div>
-                        <div className={styles.rateAmount}>₹ {calculateRate().toFixed(2)}</div>
-                    </div>
-                </div>
+            {error && <div className="text-error mb-4 text-center bg-red-50 p-2 rounded text-sm text-red-600 border border-red-200">{error}</div>}
 
-                <div className={styles.actions}>
-                    <button type="button" className={styles.cancelBtn} onClick={() => router.back()}>Cancel</button>
-                    <button type="submit" className={styles.submitBtn} disabled={loading}>
-                        {loading ? 'Processing...' : 'Confirm Booking'}
-                    </button>
-                </div>
-            </form>
+            <AnimatePresence mode="wait">
+                {currentStep === 0 && (
+                    <PickupStep
+                        key="pickup"
+                        formData={formData}
+                        handleChange={handleChange}
+                        onNext={nextStep}
+                    />
+                )}
+                {currentStep === 1 && (
+                    <DeliveryStep
+                        key="delivery"
+                        formData={formData}
+                        handleChange={handleChange}
+                        onPrev={prevStep}
+                        onNext={nextStep}
+                    />
+                )}
+                {currentStep === 2 && (
+                    <PackageStep
+                        key="package"
+                        formData={formData}
+                        handleChange={handleChange}
+                        serviceTypes={serviceTypes}
+                        selectedService={selectedService}
+                        setSelectedService={setSelectedService}
+                        calculateRate={calculateRate}
+                        loading={loading}
+                        onPrev={prevStep}
+                        onSubmit={handleSubmit}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     )
 }
