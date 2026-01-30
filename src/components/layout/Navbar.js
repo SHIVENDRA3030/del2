@@ -61,6 +61,30 @@ export default function Navbar() {
 
     const toggleMenu = () => setIsOpen(!isOpen)
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpen && !event.target.closest(`.${styles.header}`)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+    return () => document.removeEventListener('click', handleClickOutside)
+  }, [isOpen])
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
     return (
         <header className={styles.header}>
             <div className={`container ${styles.navContainer}`}>
@@ -116,8 +140,22 @@ export default function Navbar() {
                 </div>
             </div>
 
+            {/* Mobile Menu Overlay */}
+            {isOpen && (
+                <div 
+                    className={styles.mobileMenuOverlay} 
+                    onClick={toggleMenu}
+                    aria-hidden="true"
+                />
+            )}
+
             {/* Mobile Menu */}
-            <div className={`${styles.mobileMenu} ${isOpen ? styles.open : ''}`}>
+            <div 
+                className={`${styles.mobileMenu} ${isOpen ? styles.open : ''}`}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Mobile navigation menu"
+            >
                 <Link href="/" className={styles.mobileNavLink} onClick={toggleMenu}>Home</Link>
                 <Link href="/track" className={styles.mobileNavLink} onClick={toggleMenu}>Track</Link>
                 <Link href="/services" className={styles.mobileNavLink} onClick={toggleMenu}>Services</Link>

@@ -1,8 +1,11 @@
 .hero {
   position: relative;
-  background-color: var(--gray-50);
-  padding: 2rem 1rem;
+  background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+  padding: clamp(2rem, 8vw, 4rem) 1rem;
   overflow: hidden;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
 }
 
 .heroContent {
@@ -10,234 +13,347 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: clamp(2rem, 5vw, 3rem);
   align-items: center;
 }
 
 .heroText h1 {
-  font-size: 1.75rem;
+  font-size: clamp(1.75rem, 6vw, 3.5rem);
   font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 1rem;
+  line-height: 1.1;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
   color: var(--gray-900);
+  letter-spacing: -0.02em;
 }
 
 .heroText p {
-  font-size: 1rem;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
   color: var(--gray-600);
-  margin-bottom: 1.5rem;
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.6;
+  max-width: 600px;
 }
 
 .trackingWidget {
   background: var(--white);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: var(--shadow-lg);
+  padding: clamp(1.5rem, 4vw, 2rem);
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.1),
+    0 20px 40px rgba(0, 0, 0, 0.05);
   width: 100%;
+  border: 1px solid var(--gray-100);
+  backdrop-filter: blur(10px);
 }
 
 .trackingTitle {
-  font-size: 1.1rem;
+  font-size: clamp(1.1rem, 3vw, 1.25rem);
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: var(--gray-900);
 }
 
 .trackingForm {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: clamp(0.75rem, 2vw, 1rem);
 }
 
 .inputGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: clamp(0.75rem, 2vw, 1rem);
 }
 
 .input {
   width: 100%;
-  padding: 0.875rem;
-  border: 1px solid var(--gray-300);
-  border-radius: 6px;
+  padding: clamp(0.875rem, 2.5vw, 1rem);
+  border: 2px solid var(--gray-200);
+  border-radius: 12px;
   font-size: 16px;
-  /* Prevents iOS zoom */
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.2s ease;
+  background: var(--gray-50);
 }
 
 .input:focus {
   border-color: var(--primary);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(225, 31, 38, 0.1);
+}
+
+.input::placeholder {
+  color: var(--gray-500);
 }
 
 .features {
-  padding: 3rem 1rem;
-  background-color: var(--white);
+  padding: clamp(3rem, 8vw, 5rem) 1rem;
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-50) 100%);
+  position: relative;
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gray-300), transparent);
 }
 
 .sectionTitle {
   text-align: center;
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  color: var(--gray-900);
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 2px;
 }
 
 .servicesGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem;
+  gap: clamp(1.25rem, 3vw, 2rem);
   max-width: var(--container-width);
   margin: 0 auto;
 }
 
 .serviceCard {
-  background: var(--gray-50);
+  background: var(--white);
   border: 1px solid var(--gray-200);
-  padding: 1.5rem;
-  border-radius: 12px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.serviceCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
 }
 
 .serviceCard:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--primary);
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(225, 31, 38, 0.1);
+  border-color: var(--primary-light);
+}
+
+.serviceCard:hover::before {
+  transform: translateX(0);
 }
 
 .cardIcon {
-  margin-bottom: 1rem;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
   color: var(--primary);
+  transition: transform 0.3s ease;
+}
+
+.serviceCard:hover .cardIcon {
+  transform: scale(1.1);
 }
 
 .cardTitle {
-  font-size: 1.1rem;
+  font-size: clamp(1.1rem, 3vw, 1.375rem);
   font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
+  color: var(--gray-900);
 }
 
 .cardText {
   color: var(--gray-600);
   line-height: 1.6;
-  margin-bottom: 1rem;
-  font-size: 0.95rem;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  font-size: clamp(0.95rem, 2vw, 1rem);
 }
 
 .statsSection {
-  background-color: var(--secondary);
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--gray-800) 100%);
   color: var(--white);
-  padding: 3rem 1rem;
+  padding: clamp(3rem, 8vw, 5rem) 1rem;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.statsSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(225, 31, 38, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(225, 31, 38, 0.1) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: clamp(1.5rem, 4vw, 2rem);
   max-width: var(--container-width);
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.statItem {
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.statItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px);
 }
 
 .statItem h3 {
-  font-size: 1.75rem;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 800;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   color: var(--primary-light);
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .statItem p {
   color: var(--gray-300);
-  font-size: 0.9rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 500;
 }
 
-/* Tablet breakpoint */
-@media (min-width: 481px) and (max-width: 768px) {
-  .hero {
-    padding: 2.5rem 1rem;
-  }
+/* Enhanced responsive breakpoints */
 
-  .heroText h1 {
-    font-size: 2rem;
-  }
-
+/* Small tablets (481px - 640px) */
+@media (min-width: 481px) {
   .servicesGrid {
     grid-template-columns: repeat(2, 1fr);
   }
-
+  
   .inputGroup {
     flex-direction: row;
   }
 }
 
-/* Desktop breakpoint */
-@media (min-width: 768px) {
-  .hero {
-    padding: 4rem 1rem;
-  }
-
+/* Large tablets (641px - 768px) */
+@media (min-width: 641px) {
   .heroContent {
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 3rem;
+    gap: clamp(2rem, 6vw, 4rem);
   }
-
-  .heroText h1 {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .heroText p {
-    font-size: 1.1rem;
-    max-width: 500px;
-  }
-
-  .trackingWidget {
-    padding: 2rem;
-    max-width: 500px;
-  }
-
-  .inputGroup {
-    flex-direction: row;
-  }
-
-  .features {
-    padding: 5rem 1rem;
-  }
-
-  .sectionTitle {
-    font-size: 2rem;
-    margin-bottom: 3rem;
-  }
-
-  .servicesGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-
-  .serviceCard {
-    padding: 2rem;
-  }
-
-  .statsSection {
-    padding: 5rem 1rem;
-  }
-
+  
   .statsGrid {
     grid-template-columns: repeat(4, 1fr);
   }
+}
 
-  .statItem h3 {
-    font-size: 2.5rem;
+/* Small laptops (769px - 1024px) */
+@media (min-width: 769px) {
+  .hero {
+    padding: clamp(3rem, 8vw, 5rem) 1rem;
   }
-
+  
+  .heroContent {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(3rem, 8vw, 5rem);
+  }
+  
+  .heroText h1 {
+    font-size: clamp(2.5rem, 5vw, 3rem);
+  }
+  
+  .heroText p {
+    font-size: 1.125rem;
+    max-width: 500px;
+  }
+  
+  .trackingWidget {
+    padding: clamp(2rem, 5vw, 2.5rem);
+    max-width: 500px;
+  }
+  
+  .features {
+    padding: clamp(4rem, 10vw, 6rem) 1rem;
+  }
+  
+  .servicesGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+  
+  .serviceCard {
+    padding: clamp(2rem, 4vw, 2.5rem);
+  }
+  
+  .statsSection {
+    padding: clamp(4rem, 10vw, 6rem) 1rem;
+  }
+  
+  .statItem h3 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+  }
+  
   .statItem p {
-    font-size: 1.1rem;
+    font-size: 1.125rem;
   }
 }
 
-/* Large desktop */
-@media (min-width: 1024px) {
+/* Desktop (1025px - 1280px) */
+@media (min-width: 1025px) {
   .heroText h1 {
-    font-size: 3.5rem;
+    font-size: clamp(3rem, 6vw, 3.5rem);
+  }
+  
+  .sectionTitle {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+  }
+}
+
+/* Large desktop (1281px+) */
+@media (min-width: 1281px) {
+  .heroContent {
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: clamp(4rem, 10vw, 6rem);
+  }
+  
+  .heroText h1 {
+    font-size: clamp(3.5rem, 7vw, 4rem);
+  }
+  
+  .servicesGrid {
+    gap: clamp(3rem, 5vw, 4rem);
   }
 }
