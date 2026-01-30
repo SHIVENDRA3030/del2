@@ -82,8 +82,8 @@
 }
 
 .logoutBtn:hover {
-    background: rgba(255, 0, 0, 0.2);
-    color: #ff6b6b;
+    background: rgba(220, 38, 38, 0.2);
+    color: var(--error);
 }
 
 .main {
