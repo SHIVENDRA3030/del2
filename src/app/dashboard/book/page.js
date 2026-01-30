@@ -167,7 +167,7 @@ export default function BookShipment() {
                             <label className={styles.label}>City</label>
                             <input name="pickup_city" value={formData.pickup_city} onChange={handleChange} className={styles.input} required />
                         </div>
-                        <div className={styles.inputGroup} style={{ gridColumn: 'span 2' }}>
+                        <div className={`${styles.inputGroup} ${styles.inputGroupFull}`}>
                             <label className={styles.label}>Address</label>
                             <textarea name="pickup_address" value={formData.pickup_address} onChange={handleChange} className={styles.input} required rows="2" />
                         </div>
@@ -194,7 +194,7 @@ export default function BookShipment() {
                             <label className={styles.label}>City</label>
                             <input name="drop_city" value={formData.drop_city} onChange={handleChange} className={styles.input} required />
                         </div>
-                        <div className={styles.inputGroup} style={{ gridColumn: 'span 2' }}>
+                        <div className={`${styles.inputGroup} ${styles.inputGroupFull}`}>
                             <label className={styles.label}>Address</label>
                             <textarea name="drop_address" value={formData.drop_address} onChange={handleChange} className={styles.input} required rows="2" />
                         </div>
@@ -213,7 +213,7 @@ export default function BookShipment() {
                             <label className={styles.label}>Content Description</label>
                             <input name="description" value={formData.description} onChange={handleChange} className={styles.input} required />
                         </div>
-                        <div className={styles.inputGroup} style={{ gridColumn: 'span 2' }}>
+                        <div className={`${styles.inputGroup} ${styles.inputGroupFull}`}>
                             <label className={styles.label}>Service Type</label>
                             <select value={selectedService} onChange={(e) => setSelectedService(e.target.value)} className={styles.select}>
                                 {serviceTypes.map(type => (
