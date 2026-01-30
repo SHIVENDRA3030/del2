@@ -5,7 +5,7 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    border-bottom: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-100);
 }
 
 .navContainer {
@@ -13,17 +13,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.5rem;
+    gap: var(--space-md);
 }
 
 .logo {
-    font-weight: 800;
-    font-size: 1.1rem;
+    font-weight: 700;
+    font-size: 1.125rem;
     color: var(--primary);
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.5rem;
     flex-shrink: 0;
+    letter-spacing: -0.5px;
 }
 
 .logo span {
