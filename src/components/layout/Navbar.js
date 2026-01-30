@@ -143,7 +143,7 @@ export default function Navbar() {
             {/* Mobile Menu Overlay */}
             {isOpen && (
                 <div 
-                    className={styles.mobileMenuOverlay} 
+                    className={`${styles.mobileMenuOverlay} ${isOpen ? styles.open : ''}`} 
                     onClick={toggleMenu}
                     aria-hidden="true"
                 />

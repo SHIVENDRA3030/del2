@@ -78,23 +78,34 @@ a {
   align-items: center;
   justify-content: center;
   padding: 0.75rem 1.5rem;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
-  font-size: 0.95rem;
+  font-size: 1rem;
   white-space: nowrap;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    min-height: 48px;
+    padding: 0.875rem 1.25rem;
+  }
 }
 
 .btn-primary {
   background-color: var(--primary);
   color: var(--white);
+  box-shadow: 0 4px 6px -1px rgba(225, 31, 38, 0.2), 0 2px 4px -1px rgba(225, 31, 38, 0.1);
 }
 
 .btn-primary:hover {
   background-color: var(--primary-dark);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(225, 31, 38, 0.3), 0 4px 6px -2px rgba(225, 31, 38, 0.2);
 }
 
 .btn-outline {
@@ -106,6 +117,7 @@ a {
 .btn-outline:hover {
   border-color: var(--gray-900);
   color: var(--gray-900);
+  background-color: var(--gray-50);
 }
 
 /* Utilities */
@@ -145,45 +157,50 @@ a {
 
 /* Fluid typography */
 html {
-  font-size: clamp(14px, 2.5vw, 16px);
+  font-size: clamp(14px, 1.2vw + 10px, 16px);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  color: var(--gray-900);
+  letter-spacing: -0.01em;
 }
 
 /* Mobile First - Enhanced for small screens */
 @media (max-width: 480px) {
   :root {
-    --header-height: 60px;
+    --header-height: 64px;
     --container-padding: 1rem;
   }
 
   body {
-    font-size: 0.875rem;
     line-height: 1.5;
   }
 
   .container {
-    padding: 0 var(--container-padding);
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
   }
 
   /* Enhanced button touch targets */
   .btn {
-    padding: 0.875rem 1.25rem;
-    font-size: 0.9rem;
-    min-height: 48px;
-    min-width: 48px;
-    border-radius: 8px;
+    width: 100%; /* Most buttons on mobile should be full width */
+    max-width: none;
   }
-
-  /* Fluid typography */
-  h1 { font-size: clamp(1.75rem, 5vw, 2.5rem) !important; }
-  h2 { font-size: clamp(1.375rem, 4vw, 2rem) !important; }
-  h3 { font-size: clamp(1.125rem, 3vw, 1.5rem) !important; }
-  h4 { font-size: clamp(1rem, 2.5vw, 1.25rem) !important; }
 
   /* Improved form elements */
   input, textarea, select {
     font-size: 16px !important; /* Prevents iOS zoom */
     padding: 0.875rem;
-    border-radius: 8px;
+    border-radius: 10px;
+    width: 100%;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) {
+  .btn {
+    width: auto;
   }
 }
 
