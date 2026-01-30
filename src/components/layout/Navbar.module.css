@@ -82,10 +82,17 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--gray-700);
+    color: var(--gray-600);
     padding: 0.5rem;
     min-width: 44px;
     min-height: 44px;
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+}
+
+.mobileMenuBtn:hover {
+    background: var(--gray-100);
+    color: var(--primary);
 }
 
 /* Modern Mobile Menu */
