@@ -1,79 +1,132 @@
+/* ============================================
+   BOOKING FORM - MOBILE-FIRST RESPONSIVE CSS
+   ============================================ */
+
+/* Base container with proper box-sizing */
 .container {
     max-width: 800px;
     margin: 0 auto;
     background: var(--white);
-    padding: clamp(1rem, 3vw, 2rem);
-    border-radius: clamp(8px, 2vw, 12px);
+    padding: 1rem;
+    border-radius: 8px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--gray-200);
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
+/* Title styling */
 .title {
-    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: clamp(1.5rem, 4vw, 2rem);
-    padding-bottom: clamp(0.75rem, 2vw, 1rem);
+    margin: 0 0 1.25rem 0;
+    padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--gray-200);
+    line-height: 1.3;
 }
 
+/* Section containers */
 .section {
-    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 1.5rem;
 }
 
 .sectionTitle {
-    font-size: clamp(1rem, 3vw, 1.1rem);
+    font-size: 0.95rem;
     font-weight: 600;
-    margin-bottom: clamp(0.75rem, 2vw, 1rem);
+    margin: 0 0 1rem 0;
     color: var(--gray-700);
     background: var(--gray-50);
-    padding: clamp(0.375rem, 1.5vw, 0.5rem) clamp(0.75rem, 2vw, 1rem);
+    padding: 0.625rem 0.875rem;
     border-radius: 6px;
+    line-height: 1.4;
 }
 
+/* Grid Layout - SINGLE COLUMN on mobile */
 .grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(0.75rem, 2vw, 1rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
 }
 
-.inputGroupFull {
-    grid-column: 1 / -1;
-}
-
+/* Input group wrapper */
 .inputGroup {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.375rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
+/* Full width input groups (spans both columns on desktop) */
+.inputGroupFull {
+    width: 100%;
+}
+
+/* Label styling - FIXED: proper sizing and no overlap */
 .label {
-    font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+    font-size: 0.875rem;
     font-weight: 500;
     color: var(--gray-600);
+    line-height: 1.4;
+    display: block;
+    margin: 0;
+    padding: 0;
 }
 
+/* Input and Select fields - FIXED: proper sizing */
 .input,
 .select {
-    padding: clamp(0.75rem, 2vw, 0.875rem);
+    width: 100%;
+    padding: 0.875rem 1rem;
     border: 1px solid var(--gray-300);
     border-radius: 6px;
     font-size: 16px;
     /* Prevents iOS zoom */
-    width: 100%;
+    line-height: 1.5;
     min-height: 48px;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+    background: var(--white);
+    color: var(--gray-900);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Textarea specific styling */
+textarea.input {
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* Select dropdown arrow */
+.select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+/* Focus states */
 .input:focus,
 .select:focus {
     border-color: var(--primary);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(225, 31, 38, 0.1);
+    box-shadow: 0 0 0 3px rgba(225, 31, 38, 0.15);
 }
 
+/* Placeholder styling */
+.input::placeholder {
+    color: var(--gray-400);
+    opacity: 1;
+}
+
+/* Estimated Rate Card */
 .estimatedRate {
     background: var(--gray-50);
-    padding: clamp(1rem, 3vw, 1.5rem);
+    padding: 1.25rem;
     border-radius: 8px;
     border: 1px solid var(--gray-200);
     margin-top: 1rem;
@@ -81,50 +134,69 @@
 }
 
 .rateLabel {
-    font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+    font-size: 0.875rem;
     color: var(--gray-600);
+    margin-bottom: 0.375rem;
 }
 
 .rateAmount {
-    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--primary);
+    line-height: 1.2;
 }
 
+/* Action buttons container */
 .actions {
-    margin-top: clamp(1.5rem, 4vw, 2rem);
+    margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: clamp(0.75rem, 2vw, 1rem);
+    gap: 0.75rem;
 }
 
+/* Cancel button */
 .cancelBtn {
-    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
     border: 1px solid var(--gray-300);
     color: var(--gray-700);
-    padding: clamp(0.75rem, 2vw, 0.875rem) 1.5rem;
+    padding: 0.875rem 1.5rem;
     border-radius: 6px;
     font-weight: 600;
+    font-size: 0.95rem;
     cursor: pointer;
     width: 100%;
-    order: 2;
     min-height: 48px;
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    order: 2;
+    box-sizing: border-box;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
+.cancelBtn:hover {
+    background: var(--gray-50);
+    border-color: var(--gray-400);
+}
+
+/* Submit button */
 .submitBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: var(--primary);
     color: var(--white);
-    padding: clamp(0.75rem, 2vw, 0.875rem) 2rem;
+    padding: 0.875rem 1.5rem;
     border-radius: 6px;
     font-weight: 600;
+    font-size: 0.95rem;
     border: none;
     cursor: pointer;
     width: 100%;
-    order: 1;
     min-height: 48px;
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
-    transition: background 0.2s;
+    order: 1;
+    box-sizing: border-box;
+    transition: background 0.2s ease;
 }
 
 .submitBtn:hover {
@@ -136,42 +208,127 @@
     cursor: not-allowed;
 }
 
-/* Tablet and up - 2 column grid */
+/* ============================================
+   TABLET BREAKPOINT (481px+)
+   ============================================ */
 @media (min-width: 481px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Switch to CSS Grid for 2-column layout */
     .grid {
-        grid-template-columns: 1fr 1fr;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    /* Full width items span both columns */
+    .inputGroupFull {
+        grid-column: 1 / -1;
+    }
+
+    .rateAmount {
+        font-size: 2rem;
     }
 }
 
-/* Desktop - enhanced layout */
+/* ============================================
+   DESKTOP BREAKPOINT (768px+)
+   ============================================ */
 @media (min-width: 768px) {
+    .container {
+        padding: 2rem;
+        border-radius: 12px;
+    }
+
+    .title {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+    }
+
+    .section {
+        margin-bottom: 2rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .grid {
+        gap: 1.25rem;
+    }
+
     .estimatedRate {
         text-align: right;
+        padding: 1.5rem;
     }
 
     .actions {
         flex-direction: row;
         justify-content: flex-end;
+        gap: 1rem;
     }
 
     .cancelBtn {
         width: auto;
         order: 1;
+        min-width: 120px;
     }
 
     .submitBtn {
         width: auto;
         order: 2;
+        min-width: 160px;
     }
 }
 
-/* Ultra-small screens */
+/* ============================================
+   ULTRA-SMALL SCREENS (less than 375px)
+   ============================================ */
 @media (max-width: 374px) {
     .container {
         padding: 0.75rem;
         border-radius: 0;
-        box-shadow: none;
+        margin: 0 -0.5rem;
         border-left: none;
         border-right: none;
+        box-shadow: none;
+    }
+
+    .title {
+        font-size: 1.1rem;
+    }
+
+    .sectionTitle {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .label {
+        font-size: 0.8rem;
+    }
+
+    .input,
+    .select {
+        padding: 0.75rem;
+        font-size: 16px;
+    }
+
+    .rateAmount {
+        font-size: 1.5rem;
+    }
+
+    .cancelBtn,
+    .submitBtn {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
     }
 }
