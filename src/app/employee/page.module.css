@@ -1,41 +1,42 @@
 .loading {
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
     text-align: center;
     color: var(--gray-500);
 }
 
 .title {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 4vw, 1.8rem);
     font-weight: 800;
-    margin-bottom: 1.5rem;
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
 }
 
 .statsGrid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-bottom: 2rem;
+    grid-template-columns: 1fr;
+    gap: clamp(0.75rem, 2vw, 1rem);
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
 }
 
 .statCard {
     background: var(--white);
-    padding: 1.25rem;
+    padding: clamp(1rem, 3vw, 1.25rem);
     border-radius: 12px;
     box-shadow: var(--shadow-sm);
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: clamp(0.75rem, 2vw, 1rem);
 }
 
 .statIcon {
-    width: 48px;
-    height: 48px;
+    width: clamp(40px, 10vw, 48px);
+    height: clamp(40px, 10vw, 48px);
     border-radius: 12px;
     background: #f3f4f6;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--gray-600);
+    flex-shrink: 0;
 }
 
 .statIcon.pending {
@@ -56,79 +57,84 @@
 .statInfo {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .statValue {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
     font-weight: 700;
     color: var(--gray-900);
 }
 
 .statLabel {
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
     color: var(--gray-500);
 }
 
 .section {
-    margin-bottom: 2rem;
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
 }
 
 .sectionHeader {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: clamp(0.75rem, 2vw, 1rem);
 }
 
 .sectionHeader h2 {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 3vw, 1.1rem);
     font-weight: 700;
 }
 
 .viewAll {
     color: var(--primary);
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2.5vw, 0.9rem);
     font-weight: 500;
+    padding: 0.5rem 0;
+    display: inline-block;
 }
 
 .tableContainer {
     background: var(--white);
-    border-radius: 12px;
+    border-radius: clamp(8px, 2vw, 12px);
     box-shadow: var(--shadow-sm);
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .table {
     width: 100%;
-    min-width: 400px;
+    min-width: 350px;
     border-collapse: collapse;
 }
 
 .table th,
 .table td {
-    padding: 0.75rem 1rem;
+    padding: clamp(0.625rem, 2vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
     text-align: left;
     border-bottom: 1px solid var(--gray-100);
+    white-space: nowrap;
 }
 
 .table th {
     background: var(--gray-50);
     font-weight: 600;
     color: var(--gray-700);
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
     text-transform: uppercase;
 }
 
 .idCell {
     font-family: monospace;
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
 }
 
 .status {
     display: inline-block;
-    padding: 0.25rem 0.6rem;
+    padding: 0.25rem clamp(0.4rem, 1.5vw, 0.6rem);
     border-radius: 20px;
-    font-size: 0.7rem;
+    font-size: clamp(0.65rem, 2vw, 0.7rem);
     font-weight: 600;
 }
 
@@ -167,16 +173,35 @@
     color: #dc2626;
 }
 
-@media (min-width: 768px) {
-    .title {
-        font-size: 1.8rem;
+/* Small mobile - 2 column stats */
+@media (min-width: 375px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
+    .sectionHeader {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+/* Tablet and up - 4 column stats */
+@media (min-width: 768px) {
     .statsGrid {
         grid-template-columns: repeat(4, 1fr);
     }
 
     .statValue {
-        font-size: 2rem;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+}
+
+/* Ultra-small screens */
+@media (max-width: 374px) {
+    .tableContainer {
+        border-radius: 0;
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
     }
 }

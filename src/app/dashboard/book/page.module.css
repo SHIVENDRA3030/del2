@@ -2,44 +2,38 @@
     max-width: 800px;
     margin: 0 auto;
     background: var(--white);
-    padding: 1rem;
-    border-radius: 8px;
+    padding: clamp(1rem, 3vw, 2rem);
+    border-radius: clamp(8px, 2vw, 12px);
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--gray-200);
 }
 
-@media (min-width: 768px) {
-    .container {
-        padding: 2rem;
-    }
-}
-
 .title {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
     font-weight: 700;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+    padding-bottom: clamp(0.75rem, 2vw, 1rem);
     border-bottom: 1px solid var(--gray-200);
 }
 
 .section {
-    margin-bottom: 2rem;
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
 }
 
 .sectionTitle {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 3vw, 1.1rem);
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: clamp(0.75rem, 2vw, 1rem);
     color: var(--gray-700);
     background: var(--gray-50);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    padding: clamp(0.375rem, 1.5vw, 0.5rem) clamp(0.75rem, 2vw, 1rem);
+    border-radius: 6px;
 }
 
 .grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: clamp(0.75rem, 2vw, 1rem);
 }
 
 .inputGroupFull {
@@ -53,29 +47,33 @@
 }
 
 .label {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2.5vw, 0.9rem);
     font-weight: 500;
     color: var(--gray-600);
 }
 
 .input,
 .select {
-    padding: 0.75rem;
+    padding: clamp(0.75rem, 2vw, 0.875rem);
     border: 1px solid var(--gray-300);
-    border-radius: 4px;
-    font-size: 1rem;
+    border-radius: 6px;
+    font-size: 16px;
+    /* Prevents iOS zoom */
     width: 100%;
+    min-height: 48px;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .input:focus,
 .select:focus {
     border-color: var(--primary);
     outline: none;
+    box-shadow: 0 0 0 3px rgba(225, 31, 38, 0.1);
 }
 
 .estimatedRate {
     background: var(--gray-50);
-    padding: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
     border-radius: 8px;
     border: 1px solid var(--gray-200);
     margin-top: 1rem;
@@ -83,70 +81,72 @@
 }
 
 .rateLabel {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2.5vw, 0.9rem);
     color: var(--gray-600);
 }
 
 .rateAmount {
-    font-size: 1.75rem;
+    font-size: clamp(1.5rem, 5vw, 2rem);
     font-weight: 700;
     color: var(--primary);
 }
 
 .actions {
-    margin-top: 2rem;
+    margin-top: clamp(1.5rem, 4vw, 2rem);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: clamp(0.75rem, 2vw, 1rem);
 }
 
 .cancelBtn {
     background: none;
     border: 1px solid var(--gray-300);
     color: var(--gray-700);
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
+    padding: clamp(0.75rem, 2vw, 0.875rem) 1.5rem;
+    border-radius: 6px;
     font-weight: 600;
     cursor: pointer;
     width: 100%;
     order: 2;
+    min-height: 48px;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 
 .submitBtn {
     background: var(--primary);
     color: var(--white);
-    padding: 0.75rem 2rem;
-    border-radius: 4px;
+    padding: clamp(0.75rem, 2vw, 0.875rem) 2rem;
+    border-radius: 6px;
     font-weight: 600;
     border: none;
     cursor: pointer;
     width: 100%;
     order: 1;
+    min-height: 48px;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    transition: background 0.2s;
 }
 
 .submitBtn:hover {
     background: var(--primary-dark);
 }
 
-@media (min-width: 768px) {
-    .container {
-        padding: 2rem;
-    }
+.submitBtn:disabled {
+    background: var(--gray-300);
+    cursor: not-allowed;
+}
 
-    .title {
-        font-size: 1.75rem;
-    }
-
+/* Tablet and up - 2 column grid */
+@media (min-width: 481px) {
     .grid {
         grid-template-columns: 1fr 1fr;
     }
+}
 
+/* Desktop - enhanced layout */
+@media (min-width: 768px) {
     .estimatedRate {
         text-align: right;
-    }
-
-    .rateAmount {
-        font-size: 2rem;
     }
 
     .actions {
@@ -162,5 +162,16 @@
     .submitBtn {
         width: auto;
         order: 2;
+    }
+}
+
+/* Ultra-small screens */
+@media (max-width: 374px) {
+    .container {
+        padding: 0.75rem;
+        border-radius: 0;
+        box-shadow: none;
+        border-left: none;
+        border-right: none;
     }
 }

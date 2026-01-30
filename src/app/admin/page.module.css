@@ -1,99 +1,106 @@
 .loading {
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
     text-align: center;
     color: var(--gray-500);
 }
 
 .title {
-    font-size: 1.8rem;
+    font-size: clamp(1.25rem, 5vw, 1.8rem);
     font-weight: 800;
-    margin-bottom: 2rem;
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
 }
 
 .statsGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 3vw, 1.5rem);
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
 }
 
 .statCard {
     background: var(--white);
-    padding: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
     border-radius: 12px;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: clamp(0.75rem, 2vw, 1rem);
     box-shadow: var(--shadow-sm);
 }
 
 .statIcon {
-    padding: 1rem;
+    padding: clamp(0.75rem, 2vw, 1rem);
     border-radius: 12px;
+    flex-shrink: 0;
 }
 
 .statValue {
-    font-size: 1.8rem;
+    font-size: clamp(1.25rem, 5vw, 1.8rem);
     font-weight: 800;
     color: var(--gray-900);
 }
 
 .statLabel {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
     color: var(--gray-500);
 }
 
 .section {
     background: var(--white);
-    padding: 1.5rem;
-    border-radius: 12px;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border-radius: clamp(8px, 2vw, 12px);
     box-shadow: var(--shadow-sm);
 }
 
 .section h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
 }
 
 .tableContainer {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 clamp(-1rem, -2vw, -1.5rem);
+    padding: 0 clamp(1rem, 2vw, 1.5rem);
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 500px;
 }
 
 .table th,
 .table td {
-    padding: 0.75rem 1rem;
+    padding: clamp(0.625rem, 2vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
     text-align: left;
     border-bottom: 1px solid var(--gray-100);
+    white-space: nowrap;
 }
 
 .table th {
     font-weight: 600;
     color: var(--gray-600);
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
     text-transform: uppercase;
 }
 
 .idCell {
     font-family: monospace;
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
 }
 
 .empty {
     text-align: center;
     color: var(--gray-400);
-    padding: 2rem !important;
+    padding: clamp(1.5rem, 4vw, 2rem) !important;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
 }
 
 .status {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem clamp(0.5rem, 2vw, 0.75rem);
     border-radius: 20px;
-    font-size: 0.75rem;
+    font-size: clamp(0.65rem, 2vw, 0.75rem);
     font-weight: 600;
 }
 
@@ -120,4 +127,27 @@
 .status_CANCELLED {
     background: #f8d7da;
     color: #721c24;
+}
+
+/* Small mobile - 2 column stats */
+@media (min-width: 375px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tablet and up - auto-fit stats */
+@media (min-width: 768px) {
+    .statsGrid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+/* Ultra-small screens */
+@media (max-width: 374px) {
+    .section {
+        border-radius: 0;
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+    }
 }

@@ -49,7 +49,8 @@
     text-decoration: none;
     transition: all 0.2s ease;
     white-space: nowrap;
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+    min-height: 44px;
 }
 
 .navItem:hover {
@@ -76,9 +77,10 @@
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2.5vw, 0.9rem);
     transition: all 0.2s ease;
     white-space: nowrap;
+    min-height: 44px;
 }
 
 .logoutBtn:hover {
@@ -88,7 +90,20 @@
 
 .main {
     flex: 1;
-    padding: 1rem;
+    padding: clamp(0.75rem, 3vw, 1rem);
+}
+
+/* Ultra-small screens */
+@media (max-width: 374px) {
+    .sidebar {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .navItem,
+    .logoutBtn {
+        padding: 0.625rem 0.75rem;
+        font-size: 0.8rem;
+    }
 }
 
 /* Desktop */
