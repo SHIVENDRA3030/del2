@@ -372,6 +372,19 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Secondary Button */
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--white);
+  border: 1px solid transparent;
+}
+
+.btn-secondary:hover {
+  background-color: #059669;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
 /* Focus styles for accessibility */
 *:focus {
   outline: 2px solid var(--primary);
