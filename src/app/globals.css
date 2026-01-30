@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Brand Colors */
-  --primary: #E11F26;
-  /* Delhivery Red */
-  --primary-dark: #B91C22;
-  --primary-light: #FF4D54;
-  --secondary: #2C3E50;
-  /* Deep Navy */
+  /* Brand Colors - Teal/Green Palette */
+  --primary: #1B7A7A;
+  /* Deep Teal */
+  --primary-light: #2EA899;
+  /* Bright Teal */
+  --secondary: #10B981;
+  /* Emerald Green */
 
   /* Neutral Colors */
   --black: #000000;
@@ -26,19 +26,50 @@
   /* Semantic Colors */
   --success: #10B981;
   --warning: #F59E0B;
-  --error: #EF4444;
+  --error: #DC2626;
   --info: #3B82F6;
+
+  /* Typography Scale */
+  --font-h1: 3.5rem;
+  /* 52px */
+  --font-h2: 2.25rem;
+  /* 36px */
+  --font-h3: 1.875rem;
+  /* 30px */
+  --font-h4: 1.25rem;
+  /* 20px */
+  --font-body-lg: 1rem;
+  /* 16px */
+  --font-body: 0.95rem;
+  /* 15px */
+  --font-sm: 0.875rem;
+  /* 14px */
+  --font-caption: 0.75rem;
+  /* 12px */
 
   /* Spacing */
   --container-width: 1280px;
   --header-height: 70px;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
 
-  /* Shadows */
+  /* Shadows - Refined for minimalist design */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
 }
 
 * {
