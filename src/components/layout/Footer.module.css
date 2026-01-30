@@ -31,11 +31,12 @@
 .brandName {
     color: var(--white);
     font-size: clamp(1.25rem, 4vw, 1.5rem);
-    font-weight: 800;
+    font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: clamp(0.75rem, 2vw, 1rem);
+    gap: var(--space-sm);
+    margin-bottom: clamp(1rem, 2vw, 1.25rem);
+    letter-spacing: -0.5px;
 }
 
 .description {
