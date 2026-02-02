@@ -121,9 +121,9 @@ export default function Navbar() {
                                     <Briefcase size={20} />
                                 </Link>
                             )}
-                            <Link href="/dashboard" className="btn btn-outline" style={{ padding: '0.5rem 1rem' }}>
+                            <Link href="/dashboard" className="btn btn-outline" style={{ padding: '0.5rem 1rem', width: 'auto', minHeight: '40px' }}>
                                 <LayoutDashboard size={16} style={{ marginRight: '0.5rem' }} />
-                                Dashboard
+                                <span className={styles.dashboardText}>Dashboard</span>
                             </Link>
                             <button onClick={handleLogout} className={styles.logoutBtn} title="Logout">
                                 <LogOut size={20} />

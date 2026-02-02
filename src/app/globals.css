@@ -155,199 +155,137 @@ a {
 
 /* ===== MODERN RESPONSIVE DESIGN SYSTEM ===== */
 
-/* Fluid typography */
-html {
-  font-size: clamp(14px, 1.2vw + 10px, 16px);
+/* Fluid typography and spacing */
+:root {
+  /* Spacing system */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
-  color: var(--gray-900);
-  letter-spacing: -0.01em;
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+h1 { font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 800; }
+h2 { font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 700; }
+h3 { font-size: clamp(1.25rem, 4vw, 1.75rem); font-weight: 600; }
 
 /* Mobile First - Enhanced for small screens */
 @media (max-width: 480px) {
   :root {
-    --header-height: 64px;
-    --container-padding: 1rem;
-  }
-
-  body {
-    line-height: 1.5;
-  }
-
-  .container {
-    padding-left: max(1rem, env(safe-area-inset-left));
-    padding-right: max(1rem, env(safe-area-inset-right));
-  }
-
-  /* Enhanced button touch targets */
-  .btn {
-    width: 100%; /* Most buttons on mobile should be full width */
-    max-width: none;
-  }
-
-  /* Improved form elements */
-  input, textarea, select {
-    font-size: 16px !important; /* Prevents iOS zoom */
-    padding: 0.875rem;
-    border-radius: 10px;
-    width: 100%;
-  }
-}
-
-/* Tablets (481px - 768px) */
-@media (min-width: 481px) {
-  .btn {
-    width: auto;
-  }
-}
-
-/* Tablets (481px - 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
-  :root {
-    --header-height: 64px;
+    --header-height: 60px;
     --container-padding: 1.25rem;
   }
 
   body {
-    font-size: 0.9375rem;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
   }
 
   .container {
-    padding: 0 var(--container-padding);
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
   }
 
+  /* Enhanced button touch targets */
   .btn {
-    min-height: 44px;
+    width: 100%;
+    min-height: 52px;
+    font-size: 1.125rem;
+    border-radius: var(--radius-md);
+  }
+
+  /* Improved form elements */
+  input, textarea, select {
+    font-size: 16px !important;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    width: 100%;
+    background-color: var(--gray-50);
+    border: 1px solid var(--gray-200);
   }
 }
 
-/* Small laptops (769px - 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  :root {
-    --header-height: 68px;
-    --container-padding: 1.5rem;
-  }
-
-  .container {
-    padding: 0 var(--container-padding);
-  }
+/* Base Typography */
+p {
+  color: var(--gray-600);
+  margin-bottom: 1rem;
 }
 
-/* Desktop utilities */
+/* Grid System - Mobile First */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
 @media (min-width: 768px) {
-  .md\:flex { display: flex; }
-  .md\:hidden { display: none; }
-  .md\:block { display: block; }
-  .md\:grid { display: grid; }
-  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 1024px) {
-  .lg\:flex { display: flex; }
-  .lg\:hidden { display: none; }
-  .lg\:block { display: block; }
-  .lg\:grid { display: grid; }
-  .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .lg\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-  .lg\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-}
-
-/* Utility classes for responsive design */
-.flex-col { flex-direction: column; }
-.flex-row { flex-direction: row; }
-.flex-wrap { flex-wrap: wrap; }
-.items-start { align-items: flex-start; }
-.items-center { align-items: center; }
-.items-end { align-items: flex-end; }
-.justify-start { justify-content: flex-start; }
-.justify-center { justify-content: center; }
-.justify-end { justify-content: flex-end; }
-.justify-between { justify-content: space-between; }
-.gap-1 { gap: 0.25rem; }
-.gap-2 { gap: 0.5rem; }
-.gap-3 { gap: 0.75rem; }
-.gap-4 { gap: 1rem; }
-.gap-6 { gap: 1.5rem; }
-.gap-8 { gap: 2rem; }
-
-/* Responsive spacing */
-.p-2 { padding: 0.5rem; }
-.p-4 { padding: 1rem; }
-.p-6 { padding: 1.5rem; }
-.p-8 { padding: 2rem; }
-.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
-.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
-.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
-.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
-.px-4 { padding-left: 1rem; padding-right: 1rem; }
-.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-.px-8 { padding-left: 2rem; padding-right: 2rem; }
-
-/* Responsive margins */
-.m-2 { margin: 0.5rem; }
-.m-4 { margin: 1rem; }
-.m-6 { margin: 1.5rem; }
-.m-8 { margin: 2rem; }
-.my-2 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
-.my-4 { margin-top: 1rem; margin-bottom: 1rem; }
-.my-6 { margin-top: 1.5rem; margin-bottom: 1.5rem; }
-.my-8 { margin-top: 2rem; margin-bottom: 2rem; }
-
-/* Text alignment */
-.text-left { text-align: left; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
-
-/* Width utilities */
-.w-full { width: 100%; }
-.w-auto { width: auto; }
-.max-w-none { max-width: none; }
-.max-w-xs { max-width: 20rem; }
-.max-w-sm { max-width: 24rem; }
-.max-w-md { max-width: 28rem; }
-.max-w-lg { max-width: 32rem; }
-.max-w-xl { max-width: 36rem; }
-.max-w-2xl { max-width: 42rem; }
-.max-w-3xl { max-width: 48rem; }
-.max-w-4xl { max-width: 56rem; }
-.max-w-5xl { max-width: 64rem; }
-.max-w-6xl { max-width: 72rem; }
-.max-w-7xl { max-width: 80rem; }
-
-/* Form elements responsive */
-input,
-textarea,
-select {
-  font-size: 16px;
-  /* Prevents iOS zoom */
-}
-
-/* Safe area for notched phones */
-@supports (padding: max(0px)) {
-  .container {
-    padding-left: max(1rem, env(safe-area-inset-left));
-    padding-right: max(1rem, env(safe-area-inset-right));
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
+
+/* Flex utilities */
+.flex-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .flex-stack {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Card Style */
+.card {
+  background: var(--white);
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-100);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Touch-friendly tap targets */
 @media (hover: none) and (pointer: coarse) {
-  .btn {
-    min-height: 48px;
-    min-width: 48px;
-  }
-
-  a,
-  button {
-    min-height: 48px;
+  a, button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
