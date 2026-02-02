@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { Eye, X, MapPin, Package, User, Phone, Calendar } from 'lucide-react'
 import styles from './page.module.css'
 
 const STATUS_OPTIONS = ['PENDING', 'BOOKED', 'PICKED_UP', 'IN_TRANSIT', 'OUT_FOR_DELIVERY', 'DELIVERED', 'CANCELLED']
@@ -10,6 +11,7 @@ export default function AdminShipmentsPage() {
     const [shipments, setShipments] = useState([])
     const [loading, setLoading] = useState(true)
     const [selectedShipment, setSelectedShipment] = useState(null)
+    const [viewingShipment, setViewingShipment] = useState(null)
     const [newStatus, setNewStatus] = useState('')
     const [updating, setUpdating] = useState(false)
     const [message, setMessage] = useState(null)
@@ -120,6 +122,136 @@ export default function AdminShipmentsPage() {
                 </div>
             )}
 
+            {/* View Details Modal */}
+            {viewingShipment && (
+                <div className={styles.modal}>
+                    <div className={styles.detailsModal}>
+                        <div className={styles.detailsHeader}>
+                            <h3>Order Details</h3>
+                            <button
+                                className={styles.closeBtn}
+                                onClick={() => setViewingShipment(null)}
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        <div className={styles.detailsBody}>
+                            {/* Order Info */}
+                            <div className={styles.detailsSection}>
+                                <div className={styles.sectionTitle}>
+                                    <Calendar size={18} />
+                                    Order Information
+                                </div>
+                                <div className={styles.detailsGrid}>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>Shipment ID</span>
+                                        <span className={styles.detailValue}>{viewingShipment.id}</span>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>Status</span>
+                                        <span className={`${styles.status} ${styles['status_' + viewingShipment.status]}`}>
+                                            {viewingShipment.status}
+                                        </span>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>Created</span>
+                                        <span className={styles.detailValue}>{new Date(viewingShipment.created_at).toLocaleString()}</span>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>Customer</span>
+                                        <span className={styles.detailValue}>{viewingShipment.user_profiles?.full_name || 'Unknown'}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Pickup Details */}
+                            <div className={styles.detailsSection}>
+                                <div className={styles.sectionTitle}>
+                                    <MapPin size={18} />
+                                    Pickup Details
+                                </div>
+                                <div className={styles.detailsGrid}>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>Name</span>
+                                        <span className={styles.detailValue}>{viewingShipment.pickup_name || '-'}</span>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>Phone</span>
+                                        <span className={styles.detailValue}>{viewingShipment.pickup_phone || '-'}</span>
+                                    </div>
+                                    <div className={styles.detailItem + ' ' + styles.fullWidth}>
+                                        <span className={styles.detailLabel}>Address</span>
+                                        <span className={styles.detailValue}>
+                                            {viewingShipment.pickup_address || '-'}, {viewingShipment.pickup_city || ''} - {viewingShipment.pickup_pincode || ''}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Delivery Details */}
+                            <div className={styles.detailsSection}>
+                                <div className={styles.sectionTitle}>
+                                    <MapPin size={18} />
+                                    Delivery Details
+                                </div>
+                                <div className={styles.detailsGrid}>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>Name</span>
+                                        <span className={styles.detailValue}>{viewingShipment.drop_name || '-'}</span>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>Phone</span>
+                                        <span className={styles.detailValue}>{viewingShipment.drop_phone || '-'}</span>
+                                    </div>
+                                    <div className={styles.detailItem + ' ' + styles.fullWidth}>
+                                        <span className={styles.detailLabel}>Address</span>
+                                        <span className={styles.detailValue}>
+                                            {viewingShipment.drop_address || '-'}, {viewingShipment.drop_city || ''} - {viewingShipment.drop_pincode || ''}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Package Details */}
+                            <div className={styles.detailsSection}>
+                                <div className={styles.sectionTitle}>
+                                    <Package size={18} />
+                                    Package Details
+                                </div>
+                                <div className={styles.detailsGrid}>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>Weight</span>
+                                        <span className={styles.detailValue}>{viewingShipment.weight || '-'} kg</span>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>Service Type</span>
+                                        <span className={styles.detailValue}>{viewingShipment.service_type || '-'}</span>
+                                    </div>
+                                    <div className={styles.detailItem + ' ' + styles.fullWidth}>
+                                        <span className={styles.detailLabel}>Description</span>
+                                        <span className={styles.detailValue}>{viewingShipment.description || '-'}</span>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.detailLabel}>Estimated Rate</span>
+                                        <span className={styles.detailValue}>₹ {viewingShipment.estimated_rate || '0'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className={styles.detailsFooter}>
+                            <button
+                                className="btn btn-outline"
+                                onClick={() => setViewingShipment(null)}
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className={styles.tableContainer}>
                 <table className={styles.table}>
                     <thead>
@@ -147,7 +279,14 @@ export default function AdminShipmentsPage() {
                                         </span>
                                     </td>
                                     <td>{new Date(shipment.created_at).toLocaleString()}</td>
-                                    <td>
+                                    <td className={styles.actionBtns}>
+                                        <button
+                                            className={styles.viewBtn}
+                                            onClick={() => setViewingShipment(shipment)}
+                                            title="View Details"
+                                        >
+                                            <Eye size={16} />
+                                        </button>
                                         <button
                                             className={styles.actionBtn}
                                             onClick={() => setSelectedShipment(shipment)}
