@@ -85,6 +85,23 @@ export default function BookShipment() {
                 .insert({
                     user_id: user.id,
                     status: 'PENDING',
+                    // Pickup Details
+                    pickup_name: formData.pickup_name,
+                    pickup_phone: formData.pickup_phone,
+                    pickup_address: formData.pickup_address,
+                    pickup_city: formData.pickup_city,
+                    pickup_pincode: formData.pickup_pincode,
+                    // Delivery Details
+                    drop_name: formData.drop_name,
+                    drop_phone: formData.drop_phone,
+                    drop_address: formData.drop_address,
+                    drop_city: formData.drop_city,
+                    drop_pincode: formData.drop_pincode,
+                    // Package Details
+                    weight: parseFloat(formData.weight),
+                    description: formData.description,
+                    service_type: serviceTypes.find(s => s.id === selectedService)?.name || 'Standard',
+                    estimated_rate: calculateRate()
                 })
                 .select()
                 .single()
