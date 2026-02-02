@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
+import { MapPin, User, Phone } from 'lucide-react';
 import styles from '../page.module.css';
 
 const stepVariants = {
-    hidden: { opacity: 0, x: 50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
-    exit: { opacity: 0, x: -50, transition: { duration: 0.3 } }
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
+    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } }
 };
 
 export default function PickupStep({ formData, handleChange, onNext }) {
@@ -21,80 +22,82 @@ export default function PickupStep({ formData, handleChange, onNext }) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className={styles.stepContainer}
+            className={styles.formCard}
         >
-            <h2 className={styles.stepTitle}>Pickup Details</h2>
-
-            <div className={styles.inputGroup}>
-                <label className={styles.label}>Sender Name</label>
-                <input
-                    name="pickup_name"
-                    value={formData.pickup_name}
-                    onChange={handleChange}
-                    className={styles.input}
-                    placeholder="e.g. John Doe"
-                    required
-                />
+            <div className={styles.stepTitle}>
+                <MapPin size={22} className="text-primary" />
+                Pickup Details
             </div>
 
-            <div className={styles.inputGroup}>
-                <label className={styles.label}>Phone Number</label>
-                <input
-                    name="pickup_phone"
-                    value={formData.pickup_phone}
-                    onChange={handleChange}
-                    className={styles.input}
-                    placeholder="+91 98765 43210"
-                    type="tel"
-                    required
-                />
-            </div>
-
-            <div className={styles.row}>
+            <div className={styles.formGrid}>
                 <div className={styles.inputGroup}>
-                    <label className={styles.label}>Pincode</label>
+                    <label>Sender Name</label>
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            name="pickup_name"
+                            value={formData.pickup_name}
+                            onChange={handleChange}
+                            placeholder="e.g. John Doe"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div className={styles.inputGroup}>
+                    <label>Phone Number</label>
+                    <input
+                        name="pickup_phone"
+                        value={formData.pickup_phone}
+                        onChange={handleChange}
+                        placeholder="+91 98765 43210"
+                        type="tel"
+                        required
+                    />
+                </div>
+
+                <div className={styles.inputGroup}>
+                    <label>Pincode</label>
                     <input
                         name="pickup_pincode"
                         value={formData.pickup_pincode}
                         onChange={handleChange}
-                        className={styles.input}
                         placeholder="110001"
                         required
                     />
                 </div>
+
                 <div className={styles.inputGroup}>
-                    <label className={styles.label}>City</label>
+                    <label>City</label>
                     <input
                         name="pickup_city"
                         value={formData.pickup_city}
                         onChange={handleChange}
-                        className={styles.input}
                         placeholder="New Delhi"
                         required
                     />
                 </div>
-            </div>
 
-            <div className={styles.inputGroup}>
-                <label className={styles.label}>Full Address</label>
-                <textarea
-                    name="pickup_address"
-                    value={formData.pickup_address}
-                    onChange={handleChange}
-                    className={styles.input}
-                    placeholder="House no, Street, Area"
-                    rows="3"
-                    required
-                />
+                <div className={`${styles.inputGroup} ${styles.fullWidth}`}>
+                    <label>Full Address</label>
+                    <textarea
+                        name="pickup_address"
+                        value={formData.pickup_address}
+                        onChange={handleChange}
+                        placeholder="House no, Street, Area"
+                        rows="3"
+                        required
+                    />
+                </div>
             </div>
 
             <button
                 type="button"
                 onClick={handleNext}
                 disabled={!isValid}
-                className={styles.primaryBtn}
+                className="btn btn-primary"
+                style={{ marginTop: '1rem' }}
             >
-                Next Step
+                Next: Delivery Details
             </button>
         </motion.div>
     );

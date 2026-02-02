@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Menu, X, Package, LogOut, LayoutDashboard, Shield, Briefcase } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { createClient } from '@/lib/supabase/client'
 import styles from './Navbar.module.css'
 
@@ -61,47 +62,45 @@ export default function Navbar() {
 
     const toggleMenu = () => setIsOpen(!isOpen)
 
-  // Close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isOpen && !event.target.closest(`.${styles.header}`)) {
-        setIsOpen(false)
-      }
-    }
+    // Prevent body scroll when mobile menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'unset'
+        }
+        return () => {
+            document.body.style.overflow = 'unset'
+        }
+    }, [isOpen])
 
-    document.addEventListener('click', handleClickOutside)
-    return () => document.removeEventListener('click', handleClickOutside)
-  }, [isOpen])
-
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [isOpen])
+    const navLinks = [
+        { name: 'Home', href: '/' },
+        { name: 'Track', href: '/track' },
+        { name: 'Services', href: '/services' },
+        { name: 'About', href: '/about' },
+        { name: 'Contact', href: '/contact' },
+    ]
 
     return (
         <header className={styles.header}>
             <div className={`container ${styles.navContainer}`}>
                 {/* Logo */}
-                <Link href="/" className={styles.logo}>
-                    <Package size={28} color="var(--primary)" />
+                <Link href="/" className={styles.logo} onClick={() => setIsOpen(false)}>
+                    <Package size={28} />
                     DELHIVERY<span>CLONE</span>
                 </Link>
 
                 {/* Desktop Navigation */}
                 <nav className={styles.desktopNav}>
                     <ul className={styles.navLinks}>
-                        <li><Link href="/" className={styles.navLink}>Home</Link></li>
-                        <li><Link href="/track" className={styles.navLink}>Track</Link></li>
-                        <li><Link href="/services" className={styles.navLink}>Services</Link></li>
-                        <li><Link href="/about" className={styles.navLink}>About</Link></li>
-                        <li><Link href="/contact" className={styles.navLink}>Contact</Link></li>
+                        {navLinks.map((link) => (
+                            <li key={link.name}>
+                                <Link href={link.href} className={styles.navLink}>
+                                    {link.name}
+                                </Link>
+                            </li>
+                        ))}
                     </ul>
                 </nav>
 
@@ -121,8 +120,8 @@ export default function Navbar() {
                                     <Briefcase size={20} />
                                 </Link>
                             )}
-                            <Link href="/dashboard" className="btn btn-outline" style={{ padding: '0.5rem 1rem', width: 'auto', minHeight: '40px' }}>
-                                <LayoutDashboard size={16} style={{ marginRight: '0.5rem' }} />
+                            <Link href="/dashboard" className="btn btn-outline" style={{ padding: '0 0.75rem', height: '40px', minHeight: '40px', width: 'auto' }}>
+                                <LayoutDashboard size={18} />
                                 <span className={styles.dashboardText}>Dashboard</span>
                             </Link>
                             <button onClick={handleLogout} className={styles.logoutBtn} title="Logout">
@@ -130,48 +129,78 @@ export default function Navbar() {
                             </button>
                         </>
                     ) : (
-                        <Link href="/login" className="btn btn-outline" style={{ padding: '0.5rem 1rem' }}>
+                        <Link href="/login" className="btn btn-primary" style={{ height: '40px', minHeight: '40px', padding: '0 1.5rem' }}>
                             Login
                         </Link>
                     )}
-                    <button className={styles.mobileMenuBtn} onClick={toggleMenu}>
+                    <button className={styles.mobileMenuBtn} onClick={toggleMenu} aria-label="Toggle Menu">
                         {isOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
             </div>
 
-            {/* Mobile Menu Overlay */}
-            {isOpen && (
-                <div 
-                    className={`${styles.mobileMenuOverlay} ${isOpen ? styles.open : ''}`} 
-                    onClick={toggleMenu}
-                    aria-hidden="true"
-                />
-            )}
-
             {/* Mobile Menu */}
-            <div 
-                className={`${styles.mobileMenu} ${isOpen ? styles.open : ''}`}
-                role="dialog"
-                aria-modal="true"
-                aria-label="Mobile navigation menu"
-            >
-                <Link href="/" className={styles.mobileNavLink} onClick={toggleMenu}>Home</Link>
-                <Link href="/track" className={styles.mobileNavLink} onClick={toggleMenu}>Track</Link>
-                <Link href="/services" className={styles.mobileNavLink} onClick={toggleMenu}>Services</Link>
-                <Link href="/about" className={styles.mobileNavLink} onClick={toggleMenu}>About</Link>
-                <Link href="/contact" className={styles.mobileNavLink} onClick={toggleMenu}>Contact</Link>
-                {user && (
-                    <>
-                        <Link href="/dashboard" className={styles.mobileNavLink} onClick={toggleMenu}>Dashboard</Link>
-                        {isAdmin && <Link href="/admin" className={styles.mobileNavLink} onClick={toggleMenu}>Admin</Link>}
-                        {isEmployee && <Link href="/employee" className={styles.mobileNavLink} onClick={toggleMenu}>Employee Portal</Link>}
-                        <button onClick={() => { handleLogout(); toggleMenu(); }} className={styles.mobileLogout}>
-                            Logout
-                        </button>
-                    </>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div 
+                        className={styles.mobileMenu}
+                        initial={{ x: '100%' }}
+                        animate={{ x: 0 }}
+                        exit={{ x: '100%' }}
+                        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                    >
+                        <div className={styles.mobileLinks}>
+                            {navLinks.map((link, i) => (
+                                <motion.div
+                                    key={link.name}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: i * 0.05 }}
+                                >
+                                    <Link href={link.href} className={styles.mobileNavLink} onClick={toggleMenu}>
+                                        {link.name}
+                                    </Link>
+                                </motion.div>
+                            ))}
+                            {user && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: navLinks.length * 0.05 }}
+                                >
+                                    <Link href="/dashboard" className={styles.mobileNavLink} onClick={toggleMenu}>
+                                        Dashboard
+                                    </Link>
+                                </motion.div>
+                            )}
+                        </div>
+                        
+                        {user ? (
+                            <motion.button 
+                                onClick={() => { handleLogout(); toggleMenu(); }} 
+                                className={styles.mobileLogout}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.4 }}
+                            >
+                                <LogOut size={20} style={{ marginRight: '0.75rem' }} />
+                                Logout
+                            </motion.button>
+                        ) : (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.4 }}
+                                style={{ marginTop: 'auto' }}
+                            >
+                                <Link href="/login" className="btn btn-primary btn-wide-mobile" onClick={toggleMenu}>
+                                    Login / Sign Up
+                                </Link>
+                            </motion.div>
+                        )}
+                    </motion.div>
                 )}
-            </div>
+            </AnimatePresence>
         </header>
     )
 }

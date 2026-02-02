@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Package } from 'lucide-react'
+import { Package, Facebook, Twitter, Instagram, Linkedin, ArrowRight } from 'lucide-react'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -9,12 +9,18 @@ export default function Footer() {
                 <div className={styles.grid}>
                     <div className={styles.brandCol}>
                         <div className={styles.brandName}>
-                            <Package size={24} color="var(--primary)" />
-                            DELHIVERY<span style={{ color: 'var(--primary)' }}>CLONE</span>
+                            <Package size={28} />
+                            DELHIVERY<span>CLONE</span>
                         </div>
                         <p className={styles.description}>
-                            India's largest fully integrated logistics provider. We aim to build the operating system for commerce in India.
+                            India's largest fully integrated logistics provider. We are building the operating system for commerce, through a combination of world-class infrastructure and logistics operations.
                         </p>
+                        <div className={styles.socials}>
+                            <a href="#" className={styles.socialIcon} aria-label="Facebook"><Facebook size={18} /></a>
+                            <a href="#" className={styles.socialIcon} aria-label="Twitter"><Twitter size={18} /></a>
+                            <a href="#" className={styles.socialIcon} aria-label="Instagram"><Instagram size={18} /></a>
+                            <a href="#" className={styles.socialIcon} aria-label="LinkedIn"><Linkedin size={18} /></a>
+                        </div>
                     </div>
 
                     <div>
@@ -49,7 +55,11 @@ export default function Footer() {
                 </div>
 
                 <div className={styles.bottomBar}>
-                    © {new Date().getFullYear()} Delhivery Clone. All rights reserved. This is a demo project.
+                    <p>© {new Date().getFullYear()} Delhivery Clone. All rights reserved.</p>
+                    <div className={styles.flex} style={{ gap: '1.5rem' }}>
+                        <Link href="/privacy" className={styles.link}>Privacy Policy</Link>
+                        <Link href="/terms" className={styles.link}>Terms of Service</Link>
+                    </div>
                 </div>
             </div>
         </footer>
