@@ -108,43 +108,7 @@ export default function BookShipment() {
 
             if (shipmentError) throw shipmentError
 
-            // 2. Create Addresses (Origin & Destination)
-            const addresses = [
-                {
-                    shipment_id: shipment.id,
-                    type: 'pickup',
-                    name: formData.pickup_name,
-                    phone: formData.pickup_phone,
-                    address_line1: formData.pickup_address,
-                    city: formData.pickup_city,
-                    pincode: formData.pickup_pincode,
-                    country: 'India'
-                },
-                {
-                    shipment_id: shipment.id,
-                    type: 'delivery',
-                    name: formData.drop_name,
-                    phone: formData.drop_phone,
-                    address_line1: formData.drop_address,
-                    city: formData.drop_city,
-                    pincode: formData.drop_pincode,
-                    country: 'India'
-                }
-            ]
-
-            const { error: addrError } = await supabase.from('shipment_addresses').insert(addresses)
-            if (addrError) throw addrError
-
-            // 3. Create Shipment Item
-            const { error: itemError } = await supabase.from('shipment_items').insert({
-                shipment_id: shipment.id,
-                description: formData.description,
-                weight_kg: parseFloat(formData.weight),
-                quantity: 1
-            })
-            if (itemError) throw itemError
-
-            // 4. Create Initial Event
+            // 2. Create Initial Event
             await supabase.from('shipment_events').insert({
                 shipment_id: shipment.id,
                 status: 'PENDING',
