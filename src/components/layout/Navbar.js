@@ -62,7 +62,6 @@ export default function Navbar() {
 
     const toggleMenu = () => setIsOpen(!isOpen)
 
-    // Prevent body scroll when mobile menu is open
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden'
@@ -87,7 +86,7 @@ export default function Navbar() {
             <div className={`container ${styles.navContainer}`}>
                 {/* Logo */}
                 <Link href="/" className={styles.logo} onClick={() => setIsOpen(false)}>
-                    <Package size={28} />
+                    <Package size={28} strokeWidth={3} />
                     DELHIVERY<span>CLONE</span>
                 </Link>
 
@@ -120,7 +119,7 @@ export default function Navbar() {
                                     <Briefcase size={20} />
                                 </Link>
                             )}
-                            <Link href="/dashboard" className="btn btn-outline" style={{ padding: '0 0.75rem', height: '40px', minHeight: '40px', width: 'auto' }}>
+                            <Link href="/dashboard" className="brutal-btn" style={{ minHeight: '44px', padding: '0 1rem', fontSize: '0.875rem' }}>
                                 <LayoutDashboard size={18} />
                                 <span className={styles.dashboardText}>Dashboard</span>
                             </Link>
@@ -129,12 +128,12 @@ export default function Navbar() {
                             </button>
                         </>
                     ) : (
-                        <Link href="/login" className="btn btn-primary" style={{ height: '40px', minHeight: '40px', padding: '0 1.5rem' }}>
+                        <Link href="/login" className="brutal-btn brutal-btn-primary" style={{ minHeight: '44px', padding: '0 1.5rem', fontSize: '0.875rem' }}>
                             Login
                         </Link>
                     )}
                     <button className={styles.mobileMenuBtn} onClick={toggleMenu} aria-label="Toggle Menu">
-                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        {isOpen ? <X size={24} strokeWidth={3} /> : <Menu size={24} strokeWidth={3} />}
                     </button>
                 </div>
             </div>
@@ -144,16 +143,16 @@ export default function Navbar() {
                 {isOpen && (
                     <motion.div 
                         className={styles.mobileMenu}
-                        initial={{ x: '100%' }}
-                        animate={{ x: 0 }}
-                        exit={{ x: '100%' }}
-                        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.2 }}
                     >
                         <div className={styles.mobileLinks}>
                             {navLinks.map((link, i) => (
                                 <motion.div
                                     key={link.name}
-                                    initial={{ opacity: 0, x: 20 }}
+                                    initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.05 }}
                                 >
@@ -164,7 +163,7 @@ export default function Navbar() {
                             ))}
                             {user && (
                                 <motion.div
-                                    initial={{ opacity: 0, x: 20 }}
+                                    initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: navLinks.length * 0.05 }}
                                 >
@@ -181,19 +180,19 @@ export default function Navbar() {
                                 className={styles.mobileLogout}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ delay: 0.4 }}
+                                transition={{ delay: 0.3 }}
                             >
-                                <LogOut size={20} style={{ marginRight: '0.75rem' }} />
+                                <LogOut size={20} style={{ marginRight: '0.75rem' }} strokeWidth={3} />
                                 Logout
                             </motion.button>
                         ) : (
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ delay: 0.4 }}
+                                transition={{ delay: 0.3 }}
                                 style={{ marginTop: 'auto' }}
                             >
-                                <Link href="/login" className="btn btn-primary btn-wide-mobile" onClick={toggleMenu}>
+                                <Link href="/login" className="brutal-btn brutal-btn-accent w-full" onClick={toggleMenu}>
                                     Login / Sign Up
                                 </Link>
                             </motion.div>

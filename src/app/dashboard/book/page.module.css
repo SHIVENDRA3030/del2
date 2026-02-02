@@ -1,32 +1,36 @@
 .container {
-    max-width: 640px;
+    max-width: 600px;
     margin: 0 auto;
+    padding-bottom: 4rem;
 }
 
 .mainTitle {
-    font-size: clamp(1.75rem, 6vw, 2.5rem);
-    font-weight: 800;
-    margin-bottom: 2.5rem;
     text-align: center;
-    color: var(--secondary);
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    font-size: clamp(2rem, 6vw, 3rem);
 }
 
 .progressContainer {
-    margin-bottom: 3.5rem;
+    margin-bottom: 4rem;
 }
 
 .progressBar {
     height: 8px;
     background: var(--gray-200);
-    border-radius: var(--radius-full);
-    overflow: hidden;
-    margin-bottom: 1.25rem;
+    border: 2px solid var(--secondary);
+    position: relative;
+    margin-bottom: 1.5rem;
 }
 
 .progressFill {
+    position: absolute;
+    left: 0;
+    top: 0;
     height: 100%;
     background: var(--primary);
-    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .stepIndicators {
@@ -36,41 +40,36 @@
 
 .stepIndicator {
     font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
     font-size: 0.75rem;
-    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
     color: var(--gray-400);
-    transition: color 0.3s ease;
 }
 
 .activeStepIndicator {
     color: var(--secondary);
 }
 
-.formCard {
+/* Step Styling */
+.stepContent {
     background: var(--white);
-    padding: 2.5rem;
-    border: 2px solid var(--secondary);
+    border: 4px solid var(--secondary);
+    padding: 2rem;
     box-shadow: 8px 8px 0px 0px var(--secondary);
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
 }
 
-@media (max-width: 640px) {
-    .formCard {
-        padding: 1.5rem;
-        box-shadow: 4px 4px 0px 0px var(--secondary);
-        gap: 1.5rem;
+@media (min-width: 640px) {
+    .stepContent {
+        padding: 3rem;
     }
 }
 
 .stepTitle {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: var(--secondary);
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -83,98 +82,86 @@
 }
 
 @media (min-width: 640px) {
-    .formGrid {
+    .gridCols2 {
         grid-template-columns: repeat(2, 1fr);
+        display: grid;
+        gap: 1.5rem;
     }
 }
 
-.fullWidth {
-    grid-column: 1 / -1;
-}
-
-.buttonGroup {
+.inputGroup {
     display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.buttonGroup button {
+.label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--secondary);
+}
+
+.input {
+    padding: 1rem;
+    border: 3px solid var(--secondary);
+    background: var(--gray-50);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.input:focus {
+    outline: none;
+    background: var(--white);
+    border-color: var(--primary);
+}
+
+.actions {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1.25rem;
+}
+
+.actions > * {
     flex: 1;
 }
 
-.estimateBox {
-    background: var(--gray-50);
-    border: 2px dashed var(--gray-200);
+.rateCard {
+    background: var(--secondary);
+    color: var(--white);
     padding: 2rem;
-    border-radius: var(--radius-lg);
-    text-align: center;
-    margin-bottom: 1.5rem;
+    border: 3px solid var(--secondary);
+    margin-bottom: 2rem;
 }
 
-.estimateTitle {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 0.8125rem;
-    color: var(--gray-500);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.75rem;
-}
-
-.estimateValue {
-    font-size: 3rem;
-    font-weight: 800;
+.rateValue {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
     color: var(--primary);
-    font-family: 'Space Grotesk', sans-serif;
-    line-height: 1;
-}
-
-.estimateValue span {
-    font-size: 1.25rem;
-    color: var(--gray-400);
-    margin-right: 0.25rem;
-}
-
-.serviceGrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
 }
 
 .serviceOption {
+    border: 3px solid var(--gray-200);
     padding: 1.25rem;
-    border: 2px solid var(--gray-100);
-    border-radius: var(--radius-md);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.1s;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 1rem;
 }
 
 .serviceOption:hover {
-    border-color: var(--secondary);
-    background: var(--gray-50);
+    border-color: var(--gray-400);
 }
 
-.serviceOption.selected {
+.selectedService {
     border-color: var(--primary);
-    background: rgba(255, 31, 38, 0.05);
-}
-
-.serviceInfo h4 {
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-}
-
-.serviceInfo p {
-    font-size: 0.8125rem;
-    color: var(--gray-500);
-    margin: 0;
-}
-
-.servicePrice {
-    font-weight: 700;
-    font-family: 'Space Grotesk', sans-serif;
-    color: var(--secondary);
+    background: var(--gray-50);
+    box-shadow: 4px 4px 0px 0px var(--primary);
 }

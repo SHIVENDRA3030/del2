@@ -1,157 +1,155 @@
 .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: clamp(1.5rem, 5vw, 2rem) clamp(0.75rem, 3vw, 2rem);
+    padding-bottom: 5rem;
 }
 
 .header {
+    background: var(--white);
+    padding: clamp(4rem, 12vw, 6rem) 1rem;
     text-align: center;
-    margin-bottom: clamp(2rem, 5vw, 3rem);
+    border-bottom: 6px solid var(--secondary);
 }
 
 .header h1 {
-    font-size: clamp(1.5rem, 6vw, 2.5rem);
-    margin-bottom: 0.5rem;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    color: var(--secondary);
 }
 
 .header p {
+    font-size: 1.25rem;
     color: var(--gray-500);
-    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    font-weight: 600;
 }
 
 .content {
+    max-width: var(--container-width);
+    margin: 4rem auto;
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(1.5rem, 4vw, 3rem);
+    gap: 3rem;
+    padding: 0 1rem;
+}
+
+@media (min-width: 1024px) {
+    .content {
+        grid-template-columns: 1fr 2fr;
+    }
 }
 
 .contactInfo {
-    background: var(--gray-50);
-    padding: clamp(1.5rem, 4vw, 2rem);
-    border-radius: clamp(8px, 2vw, 12px);
-    order: 2;
+    background: var(--secondary);
+    color: var(--white);
+    padding: 3rem;
+    border: 4px solid var(--secondary);
+    box-shadow: 10px 10px 0px 0px var(--primary);
 }
 
 .contactInfo h3 {
-    margin-bottom: clamp(1rem, 3vw, 1.5rem);
-    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    color: var(--white);
+    font-size: 1.75rem;
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
 }
 
 .infoItem {
-    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .infoItem strong {
-    display: block;
-    color: var(--gray-900);
-    margin-bottom: 0.25rem;
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+    color: var(--primary);
 }
 
 .infoItem span {
-    color: var(--gray-600);
-    font-size: clamp(0.875rem, 2.5vw, 0.95rem);
+    font-size: 1.125rem;
+    font-weight: 600;
 }
 
 .form {
     background: var(--white);
-    padding: clamp(1.5rem, 4vw, 2rem);
-    border-radius: clamp(8px, 2vw, 12px);
-    border: 1px solid var(--gray-200);
-    order: 1;
+    padding: 2.5rem;
+    border: 4px solid var(--secondary);
+    box-shadow: 10px 10px 0px 0px var(--secondary);
+}
+
+@media (min-width: 640px) {
+    .form {
+        padding: 4rem;
+    }
+}
+
+.success {
+    background: #d1fae5;
+    color: #059669;
+    padding: 1.5rem;
+    border: 3px solid #059669;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.error {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 1.5rem;
+    border: 3px solid #dc2626;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 .formGrid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: clamp(0.75rem, 2vw, 1rem);
-    margin-bottom: clamp(0.75rem, 2vw, 1rem);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .formGrid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .inputGroup {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin-bottom: clamp(0.75rem, 2vw, 1rem);
 }
 
 .inputGroup label {
-    font-weight: 500;
-    color: var(--gray-700);
-    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--secondary);
 }
 
 .inputGroup input,
 .inputGroup textarea {
-    padding: clamp(0.75rem, 2.5vw, 0.875rem);
-    border: 1px solid var(--gray-300);
-    border-radius: 6px;
-    font-size: 16px;
-    /* Prevents iOS zoom */
-    min-height: 48px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.inputGroup textarea {
-    min-height: 120px;
-    resize: vertical;
+    padding: 1rem;
+    border: 3px solid var(--secondary);
+    background: var(--gray-50);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s;
 }
 
 .inputGroup input:focus,
 .inputGroup textarea:focus {
-    border-color: var(--primary);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(225, 31, 38, 0.1);
-}
-
-.success {
-    background: #d4edda;
-    color: #155724;
-    padding: clamp(0.75rem, 2.5vw, 1rem);
-    border-radius: 6px;
-    margin-bottom: 1rem;
-    font-size: clamp(0.875rem, 2.5vw, 0.95rem);
-}
-
-.error {
-    background: #f8d7da;
-    color: #721c24;
-    padding: clamp(0.75rem, 2.5vw, 1rem);
-    border-radius: 6px;
-    margin-bottom: 1rem;
-    font-size: clamp(0.875rem, 2.5vw, 0.95rem);
-}
-
-/* Tablet - side by side form fields */
-@media (min-width: 481px) {
-    .formGrid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-/* Desktop - side by side layout */
-@media (min-width: 768px) {
-    .content {
-        grid-template-columns: 1fr 2fr;
-    }
-
-    .contactInfo {
-        order: 1;
-    }
-
-    .form {
-        order: 2;
-    }
-}
-
-/* Ultra-small screens */
-@media (max-width: 374px) {
-    .container {
-        padding: 1rem 0.5rem;
-    }
-
-    .contactInfo,
-    .form {
-        border-radius: 8px;
-    }
+    background: var(--white);
+    box-shadow: 4px 4px 0px 0px var(--primary);
 }

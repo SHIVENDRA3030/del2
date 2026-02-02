@@ -86,7 +86,7 @@ export default function LoginPage() {
                         />
                     </div>
 
-                    <button type="submit" className={`btn btn-primary ${styles.submitBtn}`} disabled={loading}>
+                    <button type="submit" className={`brutal-btn brutal-btn-primary ${styles.submitBtn}`} disabled={loading}>
                         {loading ? 'Signing in...' : 'Sign In'}
                     </button>
                 </form>
@@ -97,9 +97,9 @@ export default function LoginPage() {
 
                 <button
                     type="button"
-                    className="btn btn-outline"
+                    className="brutal-btn w-full"
                     onClick={handleGoogleLogin}
-                    style={{ width: '100%', display: 'flex', gap: '0.5rem' }}
+                    style={{ display: 'flex', gap: '0.75rem' }}
                 >
                     <svg width="20" height="20" viewBox="0 0 24 24">
                         <path

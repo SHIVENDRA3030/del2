@@ -34,13 +34,11 @@ export default function RegisterPage() {
 
             if (signUpError) throw signUpError
 
-            // Note: Ideally we force email confirmation, but for now assuming auto-confirm or manual check.
-            // If session is established immediately:
             if (data.session) {
                 router.push('/dashboard')
                 router.refresh()
             } else {
-                setError('Please check your email to confirm your registration.')
+                setError('Registration successful! Please check your email to confirm your account.')
             }
         } catch (err) {
             setError(err.message)
@@ -69,7 +67,11 @@ export default function RegisterPage() {
                 <h1 className={styles.title}>Create Account</h1>
                 <p className={styles.subtitle}>Get started with Delhivery Clone</p>
 
-                {error && <div className={styles.error}>{error}</div>}
+                {error && (
+                    <div className={styles.error} style={error.includes('successful') ? { background: '#d1fae5', color: '#059669', borderColor: '#059669' } : {}}>
+                        {error}
+                    </div>
+                )}
 
                 <form onSubmit={handleRegister} className={styles.form}>
                     <div className={styles.inputGroup}>
@@ -112,8 +114,8 @@ export default function RegisterPage() {
                         />
                     </div>
 
-                    <button type="submit" className={`btn btn-primary ${styles.submitBtn}`} disabled={loading}>
-                        {loading ? 'Creating Account...' : 'Sign Up'}
+                    <button type="submit" className={`brutal-btn brutal-btn-primary ${styles.submitBtn}`} disabled={loading}>
+                        {loading ? 'Creating Account...' : 'Sign Up Free'}
                     </button>
                 </form>
 
@@ -123,9 +125,9 @@ export default function RegisterPage() {
 
                 <button
                     type="button"
-                    className="btn btn-outline"
+                    className="brutal-btn w-full"
                     onClick={handleGoogleLogin}
-                    style={{ width: '100%', display: 'flex', gap: '0.5rem' }}
+                    style={{ display: 'flex', gap: '0.75rem' }}
                 >
                     <svg width="20" height="20" viewBox="0 0 24 24">
                         <path
